@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell&family=Poppins:wght@200;300&family=Raleway:wght@100&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* > *{
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background: white;
+    background-image: url('./images/B.png') ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /**overflow: hidden; */
+}
