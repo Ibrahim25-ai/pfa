@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+
 import { DataGrid } from '@mui/x-data-grid';
 import './DataTable.css';
-import {userColumns, userRows} from './datatablesource'
+import {userColumns} from './datatablesource'
 import { useNavigate } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
 const DataTable = () => {
 
     let navigate = useNavigate();
@@ -33,22 +33,46 @@ const DataTable = () => {
           }
         ]
 
-        const [data,setData] = useState(userRows)
-        const handleDelete=(id) =>{
-            setData(data.filter(item =>item.id !== id ))
-        }
+      
+          
+          
+        
+          const handleDelete = (id) => {
+            setData(data.filter(item => item.id !== id))
+          }
+        
+          const [data, setData] = useState([]);
 
-        const dynamicHeight = Math.min(data.length * 6 + 8.5, 80) + 'vh'
+          const loadPosts = async () => {
+            let results = await fetch(`http://localhost:5050/lands/getLand`).then(resp => resp.json());
+            const convertedResults = results.map(obj => {
+              return {
+                id: obj._id, 
+                
+                coord: obj.geo_loc,
+                type: obj.sail_type,
+                altitude: obj.alt,
+                nb: obj.num_trees
+              };
+            });
+            console.log(convertedResults);
+            setData(convertedResults);
+          };
 
-    return (
-        <div className='DataTable'>
-            <DataGrid style={{height: 423}}
-            rows={data}
-            columns={userColumns.concat(actionColumn)}
-            pageSize={6}
-            rowsPerPageOptions={[6]}
-            />
-        </div>
-    )
+useEffect(() => {
+  loadPosts();
+}, []);
+
+return (
+  <div className='DataTable'>
+    <DataGrid
+      style={{ height: 423 }}
+      rows={data}
+      columns={userColumns.concat(actionColumn)}
+      pageSize={6}
+      rowsPerPageOptions={[6]}
+    />
+  </div>
+)
 }
 export default DataTable;

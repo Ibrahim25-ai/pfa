@@ -7,9 +7,3 @@ export const userColumns = [
 ];
 
 
-const loadPosts =  async () => {
-  const test=[];
-  let results = await fetch(`http://localhost:5050/lands/getLand`).then(resp => test.push(resp.json()));
-  console.log(test);
-}
-export const userRows = loadPosts();
