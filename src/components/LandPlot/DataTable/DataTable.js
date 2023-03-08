@@ -4,6 +4,13 @@ import './DataTable.css';
 import {userColumns} from './datatablesource'
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+import './DataTable.css';
+import {userColumns, userRows} from './datatablesource'
+import { useNavigate } from 'react-router-dom';
+import {FaTrashAlt,FaLeaf,FaRegEye} from 'react-icons/fa';
+
 const DataTable = () => {
 
     let navigate = useNavigate();
@@ -23,9 +30,10 @@ const DataTable = () => {
             renderCell: (params) => {
               return (
                 <div className="cellAction">
-                    <div className='viewButton1' onClick={handleClick1}>View Details</div>
-                    <div className='viewButton2' onClick={handleClick2}>Harvest</div>
-                    <div className='deleteButton' onClick={()=>handleDelete(params.row.id)}>Delete</div>
+                    
+                    <div className='viewButton1' onClick={handleClick1}><FaRegEye className='icon'/>&ensp;View Details</div>
+                    <div className='viewButton2' onClick={handleClick2}><FaLeaf className='icon'/>&ensp;Harvest</div>
+                    <div className='deleteButton' onClick={()=>handleDelete(params.row.id)}><FaTrashAlt/>&ensp;Delete</div>
                 </div>
 
               );

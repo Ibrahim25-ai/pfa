@@ -8,7 +8,9 @@ import LandPlot from './components/LandPlot/LandPlot';
 import DataTable from './components/LandPlot/DataTable/DataTable'
 import Trees from './components/Trees/Trees';
 import Harvest from './components/Harvest/Harvest';
-import DataTree from './components/Trees/DataTree/DataTree'
+import DataTree from './components/Trees/DataTree/DataTree';
+import AddLandPlot from './components/LandPlot/AddLandPlot/AddLandPlot';
+import AddTrees from './components/Trees/AddTrees/AddTrees';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/Harvest" element={<Harvest/>} />
           <Route path="/DataTree" element={<DataTree/>} />
 
+          <Route path="/AddLandPlot" element={<AddLandPlot/>} />
+          <Route path="/AddTrees" element={<AddTrees/>} />
 
         </Routes>
       </BrowserRouter>
