@@ -14,7 +14,7 @@ const DataTree = () => {
             headerName: "ACTION",
             width: 117,
             renderCell: (params) => {
-              const rowId = params.id; // récupérer l'ID de la ligne
+              
               return (
                 <div className="cellAction">
                     <div className='deleteButton'  onClick={()=>handleDelete(params.row)}><FaTrashAlt/>&ensp;Delete</div>

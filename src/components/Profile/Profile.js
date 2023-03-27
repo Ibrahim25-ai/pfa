@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Toaster} from 'react-hot-toast'
 import './Profile.css'
-import profile from '../../images/profile.png'
+
 import Image from './Image';
 import NavBar from '../NavBar/NavBar';
 

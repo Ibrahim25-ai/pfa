@@ -14,9 +14,7 @@ function NavBar(){
       setShowNav(false);
     };
   
-    const handleLogoClick = () => {
-      setShowNav(true);
-    };
+    
 
     return(
         
