@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Toaster} from 'react-hot-toast'
 import './Harvest.css'
 import NavBar from '../NavBar/NavBar';
 

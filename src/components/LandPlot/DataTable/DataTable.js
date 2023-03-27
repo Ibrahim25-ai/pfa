@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import './DataTable.css';
-import {userColumns, userRows} from './datatablesource'
+import {userColumns} from './datatablesource'
 import { useNavigate } from 'react-router-dom';
+import {FaTrashAlt,FaLeaf,FaRegEye} from 'react-icons/fa';
 
 const DataTable = () => {
 
@@ -23,9 +24,9 @@ const DataTable = () => {
             renderCell: (params) => {
               return (
                 <div className="cellAction">
-                    <div className='viewButton1' onClick={handleClick1}>View Details</div>
-                    <div className='viewButton2' onClick={handleClick2}>Harvest</div>
-                    <div className='deleteButton' onClick={()=>handleDelete(params.row.id)}>Delete</div>
+                    <div className='viewButton1' onClick={handleClick1}><FaRegEye className='icon'/>&ensp;View Details</div>
+                    <div className='viewButton2' onClick={handleClick2}><FaLeaf className='icon'/>&ensp;Harvest</div>
+                    <div className='deleteButton' onClick={()=>handleDelete(params.row.id)}><FaTrashAlt/>&ensp;Delete</div>
                 </div>
 
               );
@@ -33,22 +34,42 @@ const DataTable = () => {
           }
         ]
 
-        const [data,setData] = useState(userRows)
-        const handleDelete=(id) =>{
-            setData(data.filter(item =>item.id !== id ))
-        }
+        const handleDelete = (id) => {
+            setData(data.filter(item => item.id !== id))
+          }
+        
+          const [data, setData] = useState([]);
 
-        const dynamicHeight = Math.min(data.length * 6 + 8.5, 80) + 'vh'
+          const loadPosts = async () => {
+            let results = await fetch(`http://localhost:5050/lands/getLand`).then(resp => resp.json());
+            const convertedResults = results.map(obj => {
+              return {
+                id: obj._id, 
+                
+                coord: obj.geo_loc,
+                type: obj.sail_type,
+                altitude: obj.alt,
+                nb: obj.num_trees
+              };
+            });
+            console.log(convertedResults);
+            setData(convertedResults);
+          };
 
-    return (
-        <div className='DataTable'>
-            <DataGrid style={{height: 423}}
-            rows={data}
-            columns={userColumns.concat(actionColumn)}
-            pageSize={6}
-            rowsPerPageOptions={[6]}
-            />
-        </div>
-    )
+useEffect(() => {
+  loadPosts();
+}, []);
+
+return (
+  <div className='DataTable'>
+    <DataGrid
+      style={{ height: 423 }}
+      rows={data}
+      columns={userColumns.concat(actionColumn)}
+      pageSize={6}
+      rowsPerPageOptions={[6]}
+    />
+  </div>
+)
 }
 export default DataTable;
