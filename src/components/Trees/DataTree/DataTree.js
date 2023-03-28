@@ -12,12 +12,12 @@ const DataTree = () => {
         {
             field: "action",
             headerName: "ACTION",
-            width: 117,
+            width: 110,
             renderCell: (params) => {
               const rowId = params.id; // récupérer l'ID de la ligne
               return (
                 <div className="cellAction">
-                    <div className='deleteButton'  onClick={()=>handleDelete(params.row)}>Delete</div>
+                    <div className='deleteButton'  onClick={()=>handleDelete(params.row)}><FaTrashAlt/>&ensp;Delete</div>
                 </div>
 
               );
@@ -34,6 +34,8 @@ const DataTree = () => {
                 const nb = parseInt(data[index].nb);
                 if(nbToDelete > nb){
                     alert("You cannot delete more trees than the quantity");
+                } else  if (nbToDelete === nb){
+                    setData((prevData) => prevData.filter((item) => item.id !== row.id));
                 } else {
                     setData(prevData => prevData.map(item =>{
                         if (item.id === row.id) {
@@ -46,18 +48,18 @@ const DataTree = () => {
             }
         };
 
-        const dynamicHeight = Math.min(data.length * 6 + 8.5, 80) + 'vh'
+        
 
     return (
         <div className='DataTree'>
                 <DataGrid className="dataGrid"
-                    style={{ height: '100%'}}
+                    style={{ height: 423}}
                     rows={data}
                     columns={userColumns.concat(actionColumn)}
                     pageSize={6}
                     rowsPerPageOptions={[6]}
                     autoHeight={true}
-                    height={dynamicHeight}
+                    
                 />
         
       </div>

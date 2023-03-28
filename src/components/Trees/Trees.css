@@ -22,7 +22,10 @@
     padding: 5px;
     border-radius: 5px;
     color: #fff;
-    background-color: green;
+    /*background-color: ;*/
+    background-color:  rgb(42, 128, 0);
+    color: white;
+    
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     width: 10%;
@@ -30,8 +33,10 @@
   }
   
   .addButton:hover {
-    background-color: #3f9652;
-    color: white;
+    background-color: whitesmoke;
+    color: rgb(42, 128, 0);
+    border: 1px solid rgb(42, 128, 0);
+   
     
   }
   
