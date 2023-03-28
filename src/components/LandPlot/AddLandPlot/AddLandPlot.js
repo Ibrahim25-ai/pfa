@@ -9,10 +9,34 @@ function AddLandPlot() {
   const [Nval,setNval]= useState("");
 
 
-
-  const handlesubmit=(event)=>{
-      event.preventDefault();
-    }
+  function handlesubmit(event) {
+    event.preventDefault();
+  
+    const data = {
+      geographic_location: Gval,
+      soil_type: Tval,
+      altitude: Aval,
+      number_of_trees: Nval,
+    };
+  
+    fetch("http://localhost:5050/lands/addLand", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        // do something with the response data
+      })
+      .catch(error => {
+        console.error(error);
+        // handle the error
+      });
+  }
+  
 
   return (
     <div>
