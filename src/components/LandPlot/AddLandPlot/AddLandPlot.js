@@ -1,43 +1,60 @@
 import React, {useState} from 'react';
 
-
+import Web3 from 'web3';
+import truffleContract from 'truffle-contract';
+import FarmContract from './Farmer.json';
 function AddLandPlot() {
 
   const [Gval,setGval]= useState("");
   const [Tval,setTval]= useState("");
   const [Aval,setAval]= useState("");
   const [Nval,setNval]= useState("");
-
-
-  function handlesubmit(event) {
+  const handlesubmit = async (event) => {
     event.preventDefault();
-  
-    const data = {
-      geographic_location: Gval,
-      soil_type: Tval,
-      altitude: Aval,
-      number_of_trees: Nval,
-    };
-  
-    fetch("http://localhost:5050/lands/addLand", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        // do something with the response data
-      })
-      .catch(error => {
-        console.error(error);
-        // handle the error
-      });
-  }
-  
 
+    const provider = window.ethereum;
+    const web3 = new Web3(provider);
+    await provider.enable();
+
+    const contract = truffleContract(FarmContract);
+    contract.setProvider(provider);
+
+    const accounts = await web3.eth.getAccounts();
+    const owner = accounts[0];
+
+    try {
+      const instance = await contract.deployed();
+      await instance.addFarm(Gval, Tval, Aval, Nval, { from: owner });
+      const data = {
+        geo_loc: Gval,
+        sail_type: Tval,
+        alt: Aval,
+        num_trees: Nval,
+      };
+    
+      fetch("http://localhost:5050/lands/addLand", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          // do something with the response data
+        })
+        .catch(error => {
+          console.error(error);
+          // handle the error
+        });
+      console.log('Transaction completed!');
+      
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div>
       <div id='cont' className='container mx-auto '>
