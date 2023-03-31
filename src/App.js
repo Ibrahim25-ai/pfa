@@ -17,7 +17,7 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route path="/NavBar" element={<NavBar/>} />
+          <Route path="/NavBa" element={<NavBar/>} />
           <Route path="/Profile" element={<Profile/>} />
           <Route path="/Image" element={<Image/>} />
           <Route path="/LandPlot" element={<LandPlot/>} />
