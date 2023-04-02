@@ -31,6 +31,19 @@ router.post("/addLand", async (req, res) => {
     }
   });
 
+  router.post("/addharvest", async (req, res) => {
+    const data = req.body; // assuming that the data is sent as the request body
+  
+    try {
+      const result = await db.collection("Harvest").insertOne(data);
+      console.log(`Inserted document with _id: ${result.insertedId}`);
+      res.status(201).send({ message: "Data inserted successfully" });
+    } catch (err) {
+      console.error(`Error inserting document: ${err}`);
+      res.status(500).send({ message: "Error inserting data" });
+    }
+  });
+
   /*router.delete("/deleteLand/:id", async (req, res) => {
     const id = req.params.id;
     try {
