@@ -1,0 +1,63 @@
+
+
+.settings-contain{
+    margin-top: 5px;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 15px;
+    box-shadow: 0 4px 30px #4747470b;
+    backdrop-filter: blur(7.1px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    border-width: 4px;
+    flex-shrink: 0; 
+    height: 85%;
+    width: 50%; 
+    border-radius: 40px; 
+    padding-top: 10px; 
+    padding-bottom: 20px; 
+    padding-left: 28px; 
+    padding-right: 28px; 
+    min-width: max-content; 
+    @apply border-gray-50
+
+    
+}
+
+.textbox{
+    /* @apply border-0 px-5 py-4 rounded-xl w-3/4 shadow-sm text-lg;
+     @apply focus:outline-none; */
+     border-width: 0; /* This is the equivalent of `border-0` */
+     padding-left: 20px; /* This is the equivalent of `px-5` */
+     padding-right: 20px; /* This is the equivalent of `px-5` */
+     padding-top: 10px; /* This is the equivalent of `py-4` */
+     padding-bottom: 10px; /* This is the equivalent of `py-4` */
+     border-radius: 20px; /* This is the equivalent of `rounded-xl` */
+     width: 100%; /* This is the equivalent of `w-3/4` */
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05); /* This is the equivalent of `shadow-sm` */
+     font-size: 1.125rem; /* This is the equivalent of `text-lg` */
+ }
+
+ .textbox:focus {
+    outline: none; 
+  }
+  .btn{
+    border: 1px solid;
+    background-color:olive;
+    width: 100%;
+    padding-top: 5px;
+  
+    border-radius: 0.5rem;
+    color: #f3f4f6;
+    font-size: 1.25rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    
+}
+
+.btn:hover{
+    background-color: rgb(138, 138, 61);
+}
+
+input[type='file'] {
+    display: none;
+}
