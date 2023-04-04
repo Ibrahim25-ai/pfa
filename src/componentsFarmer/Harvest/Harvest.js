@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './Harvest.css'
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../../NavBar/NavBar';
 
 
 function Harvest() {
