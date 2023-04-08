@@ -15,7 +15,7 @@ function Harvest() {
 
   function handlesubmit(event) {
     event.preventDefault();
-  
+    
     const data = {
       Harvest_Date: Dval,
       Harvest_Method: Mval,
@@ -34,7 +34,7 @@ function Harvest() {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        // do something with the response data
+        window.location.replace("http://localhost:3000/landplot");
       })
       .catch(error => {
         console.error(error);

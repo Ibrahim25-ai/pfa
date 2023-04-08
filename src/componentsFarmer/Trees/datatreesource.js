@@ -5,44 +5,4 @@ export const userColumns=[
     { field: "date", headerName: "Planting Date", width: 200,}
     
 ]
-  //temporary data
-  export const userRows = [
-    {
-      id: 1,
-      type: "behi",
-      date:"11 Sep",
-      nb:"1000",
-    },
-    {
-      id: 2,
-      type: "behi",
-      date:"11 Sep",
-      nb:"500",
-    },
-    {
-        id: 3,
-        type: "behi",
-        date:"11 Sep",
-        nb:"1000",
-      },
-      {
-        id: 4,
-        type: "behi",
-        date:"11 Sep",
-        nb:"500",
-      },
-      {
-        id: 5,
-        type: "behi",
-        date:"11 Sep",
-        nb:"1000",
-      },
-      {
-        id: 6,
-        type: "behi",
-        date:"11 Sep",
-        nb:"1000",
-      },
-
-
-  ];
+  

@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 
-// Get a list of 50 posts
+// Get a list of lands
 router.get("/getLand", async (req, res) => {
   
 
@@ -16,13 +16,35 @@ router.get("/getLand", async (req, res) => {
     console.log(results);
     res.send(results);
 });
+// Get a list of olives
+router.post("/getTrees", async (req, res) => {
+  
+  const id = req.body.id;
+  const cursor = db.collection("tree").find({ land_id: id});
 
+  const results = await cursor.toArray();
+  console.log(results);
+  res.send(results);
+});
 
 router.post("/addLand", async (req, res) => {
     const data = req.body; // assuming that the data is sent as the request body
   
     try {
       const result = await db.collection("landPlots").insertOne(data);
+      console.log(`Inserted document with _id: ${result.insertedId}`);
+      res.status(201).send({ message: "Data inserted successfully" });
+    } catch (err) {
+      console.error(`Error inserting document: ${err}`);
+      res.status(500).send({ message: "Error inserting data" });
+    }
+  });
+
+  router.post("/addTree", async (req, res) => {
+    const data = req.body; // assuming that the data is sent as the request body
+  
+    try {
+      const result = await db.collection("tree").insertOne(data);
       console.log(`Inserted document with _id: ${result.insertedId}`);
       res.status(201).send({ message: "Data inserted successfully" });
     } catch (err) {

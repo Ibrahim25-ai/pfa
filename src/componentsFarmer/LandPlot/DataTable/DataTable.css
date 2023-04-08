@@ -1,0 +1,55 @@
+.DataTable{
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 4px 30px #4747470b;
+    backdrop-filter: blur(7.1px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+}
+.cellWithImg{
+    display: flex;
+    align-items: center;
+}
+.cellImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+.cellAction{
+    display: flex;
+    align-items: center;
+    gap:15px;
+    font-size: 12px
+}
+.viewButton1{
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: rgb(42,128,0);
+    border: 1px dotted rgb(42,128,0);
+    cursor: pointer;
+    display: flex;
+}
+.viewButton2{
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: rgb(42,128,0);
+    border: 1px dotted rgb(42,128,0);
+    cursor: pointer;
+    display: flex;
+}
+.deleteButton{
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: red;
+    border: 1px dotted red;
+    cursor: pointer;
+    
+}
+DataGrid{
+        overflow: auto;
+       
+}
+.icon{
+    margin-top: 2px;
+}

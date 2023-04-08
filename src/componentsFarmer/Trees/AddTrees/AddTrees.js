@@ -1,18 +1,63 @@
 import React, {useState} from 'react';
-
-
+import Web3 from 'web3';
+import truffleContract from 'truffle-contract';
+import { useLocation } from 'react-router-dom';
+import SupplyChain from './SupplyChain.json';
 
 function AddTrees() {
 
   const [Dval,setDval]= useState("");
   const [Vval,setVval]= useState("");
   const [Nval,setNval]= useState("");
+  const location = useLocation();
+  const { landid } = location.state;
+  const handlesubmit = async (event) => {
+    event.preventDefault();
 
+    const provider = window.ethereum;
+    const web3 = new Web3(provider);
+    await provider.enable();
 
+    const contract = truffleContract(SupplyChain);
+    contract.setProvider(provider);
 
-  const handlesubmit=(event)=>{
-      event.preventDefault();
+    const accounts = await web3.eth.getAccounts();
+    const owner = accounts[0];
+
+    try {
+      const instance = await contract.deployed();
+        
+      await instance.olivePlantItem(owner, landid, Nval, Vval,Dval, { from: owner });
+      const data = {
+    
+        id: owner, 
+        oliveVariety: Vval,
+        plantDate: Dval,
+        nbTrees: Nval,
+        land_id : landid
+      };
+      fetch("http://localhost:5050/lands/addTree", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            // do something with the response data
+          })
+          .catch(error => {
+            console.error(error);
+            // handle the error
+          });
+        console.log('Transaction completed!');
+        window.location.reload();
+    } catch (error) {
+      console.error(error);
     }
+  };
 
   return (
     <div>

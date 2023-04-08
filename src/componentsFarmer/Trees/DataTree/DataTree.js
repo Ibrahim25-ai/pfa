@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import './DataTree.css';
 import {FaTrashAlt} from 'react-icons/fa';
-import {userColumns, userRows} from '../datatreesource'
-
+import {userColumns} from '../datatreesource'
+import { useLocation } from 'react-router-dom';
 
 const DataTree = () => {
 
@@ -25,8 +25,7 @@ const DataTree = () => {
           }
         ]
 
-        const [data,setData] = useState(userRows);
-
+        const [data, setData] = useState([]);
         const handleDelete=(row) =>{
             const nbToDelete = parseInt(prompt("How many trees do you want to delete?"));
             if(!isNaN(nbToDelete)){
@@ -46,8 +45,40 @@ const DataTree = () => {
             }
         };
 
-        const dynamicHeight = Math.min(data.length * 6 + 8.5, 80) + 'vh'
+        const location = useLocation();
+        const { landid } = location.state;
+        
+        const loadTrees = async () => {
+            
+            const requestBody = {
+              id: landid
+            };
 
+            
+            console.log(landid);
+                const options = {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestBody)
+              };
+              let results = await fetch(`http://localhost:5050/lands/getTrees`, options).then(resp => resp.json());
+              const convertedResults = results.map(obj => {
+              return {
+                id: obj._id, 
+                type: obj.oliveVariety,
+                date: obj.plantDate,
+                nb: obj.nbTrees
+              };
+            });
+            console.log(convertedResults);
+            setData(convertedResults);
+        };
+
+useEffect(() => {
+loadTrees();
+}, []);
     return (
         <div className='DataTree'>
                 <DataGrid className="dataGrid"
@@ -57,7 +88,7 @@ const DataTree = () => {
                     pageSize={6}
                     rowsPerPageOptions={[6]}
                     autoHeight={true}
-                    height={dynamicHeight}
+                    
                 />
         
       </div>
