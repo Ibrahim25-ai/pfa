@@ -6,7 +6,7 @@ import NavBar from '../../NavBar/NavBar';
 function Harvest() {
 
   const [Dval,setDval]= useState("");
-  const [Nval,setNval]= useState("");
+  const [Eval,setEval]= useState("");
   const [Tval,setTval]= useState("");
   const [Mval,setMval]= useState("");
   const [Sval,setSval]= useState("");
@@ -19,7 +19,7 @@ function Harvest() {
     const data = {
       Harvest_Date: Dval,
       Harvest_Method: Mval,
-      Tree_numbers: Nval,
+     
       Storage_Temperature: Sval,
       Total_Weight: Tval,
     };
@@ -62,14 +62,14 @@ function Harvest() {
               <div className="flex flex-col item-center gap-2 ">
                 
                 <div className='name flex w-2/3 gap-20' style={{width : "100%"}}>
-                    <input className='textbox' placeholder='Harvest Date' type='text' value={Dval}
+                    <input className='textbox' placeholder='Start Date' type='text' value={Dval}
                         onChange={(e)=>{setDval(e.target.value)}}/>
-                    <input className='textbox' placeholder='Harvest Method' type='text' value={Mval}
-                        onChange={(e)=>{setMval(e.target.value)}} /> 
+                    <input className='textbox' placeholder='End Date' type='text' value={Eval}
+                        onChange={(e)=>{setEval(e.target.value)}}/>
                 </div>      
                 
-                <input className='textbox' placeholder='Number of Harvested Trees' type='text' value={Nval}
-                        onChange={(e)=>{setNval(e.target.value)}}/>
+                <input className='textbox' placeholder='Harvest Method' type='text' value={Mval}
+                        onChange={(e)=>{setMval(e.target.value)}} />
                 <input className='textbox' placeholder='Total Weight of Harvest' type='text' value={Tval}
                         onChange={(e)=>{setTval(e.target.value)}} />
                                
