@@ -23,6 +23,7 @@ contract SupplyChain
     enum OliveState {
         Planted,
         Harvested,
+        produced,
         Audited,
         Processed
     }
@@ -53,7 +54,7 @@ contract SupplyChain
     event LandCreated(address _idLand);
     event OlivePlanted(address _oliveID);
     event OliveHarvested(address _oliveID);
-    
+    event OliveProduced(address _oliveID);
 
    
 
@@ -144,6 +145,17 @@ contract SupplyChain
         oliveItems[_oliveID].itemState = OliveState.Harvested;
         // Emit the appropriate event
         emit OliveHarvested(_oliveID);
+    }
+    function oliveProducetItem(
+        address _oliveID
+
+    ) public  isHarvested(_oliveID) {
+        
+        
+        // Update state
+        oliveItems[_oliveID].itemState = OliveState.produced;
+        // Emit the appropriate event
+        emit OliveProduced(_oliveID);
     }
 
 }
