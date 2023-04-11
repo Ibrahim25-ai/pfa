@@ -43,7 +43,6 @@ const DataTableM = () => {
           }
         
           const [data, setData] = useState([]);
-<<<<<<< HEAD:src/componentsManufacturer/Table/DataTableM/DataTableM.js
           
 
           const loadPosts = async () => {
@@ -68,9 +67,7 @@ const DataTableM = () => {
           useEffect(() => {
             loadPosts();
           }, []);
-=======
           const [OpenPopup, setOpenPopup] = useState(false);
->>>>>>> 37912243f201d334de05a690cc2d28fa682852f3:src/componentsManufacturer/ManufacturerTable/DataTableM/DataTableM.js
 
 return (
   <div className='DataTable'>
