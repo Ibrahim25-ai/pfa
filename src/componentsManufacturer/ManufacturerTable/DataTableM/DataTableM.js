@@ -67,6 +67,7 @@ const DataTableM = () => {
           useEffect(() => {
             loadPosts();
           }, []);
+
           const [OpenPopup, setOpenPopup] = useState(false);
 
 return (
