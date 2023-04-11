@@ -3,10 +3,10 @@ import React, {useState} from 'react';
 function AddOil() {
 
   const [Pval,setPval]= useState("");
-  const [Eval,setEval]= useState("");
+  const [Qval,setQval]= useState("");
   const [Mval,setMval]= useState("");
   const [Sval,setSval]= useState("");
-  const [Aval,setAval]= useState("");
+ 
   
   const handlesubmit=(event)=>{
     event.preventDefault();
@@ -33,15 +33,14 @@ function AddOil() {
               <div className='name flex w-2/3 gap-20' style={{width : "100%"}}>
                     <input className='textbox' placeholder='Production Date' type='text' value={Pval}
                         onChange={(e)=>{setPval(e.target.value)}}/>
-                    <input className='textbox' placeholder='Expiration Date' type='text' value={Eval}
-                        onChange={(e)=>{setEval(e.target.value)}} /> 
+                    <input className='textbox' placeholder='Quantity (L)' type='text' value={Qval}
+                        onChange={(e)=>{setQval(e.target.value)}} /> 
                 </div>  
                 <input className='textbox' placeholder='Production Method' type='text' value={Mval}
                         onChange={(e)=>{setMval(e.target.value)}}/>
-                <input className='textbox' placeholder='Smoke Point' type='text' value={Sval}
+                <input className='textbox' placeholder='Smoke Point Temprature' type='text' value={Sval}
                         onChange={(e)=>{setSval(e.target.value)}} />
-                <input className='textbox' placeholder='Fatty Acids' type='text' value={Aval}
-                        onChange={(e)=>{setAval(e.target.value)}} />
+                <br/>
                                
                 
                 <button className="btn" type="submit">Add</button>

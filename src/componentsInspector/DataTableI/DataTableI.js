@@ -6,27 +6,21 @@ import { useNavigate } from 'react-router-dom';
 import {FaTrashAlt,FaLeaf,FaRegEye} from 'react-icons/fa';
 
 
-const DataTable = () => {
 
-    let navigate = useNavigate();
-    const handleClick1 = () => {
-        navigate('../../produceOil');
-    };
 
-    const handleClick2 = () => {
-        navigate('../../packageOil');
-    };
+const DataTableI = () => {
+
+    
 
     const actionColumn=[
         {
             field: "action",
             headerName: "ACTION",
-            width: 235,
+            width: 205,
             renderCell: (params) => {
               return (
-                <div className="cellAction">
-                    <div className='viewButton1' onClick={handleClick1}>Produce Oil</div>
-                    <div className='viewButton2' onClick={handleClick2}>Package Oil</div>
+                <div className="cellAction"> 
+                    <div className='viewButton2'>Certification</div>
                     <div className='deleteButton' onClick={()=>handleDelete(params.row.id)}><FaTrashAlt/>&ensp;Delete</div>
                 </div>
 
@@ -35,11 +29,15 @@ const DataTable = () => {
           }
         ]
 
+      
+        
+
         const handleDelete = (id) => {
             setData(data.filter(item => item.id !== id))
           }
         
           const [data, setData] = useState([]);
+          
 
 return (
   <div className='DataTable'>
@@ -50,7 +48,8 @@ return (
       pageSize={6}
       rowsPerPageOptions={[6]}
     />
+   
   </div>
 )
 }
-export default DataTable;
+export default DataTableI;
