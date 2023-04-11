@@ -40,6 +40,30 @@ const DataTable = () => {
           }
         
           const [data, setData] = useState([]);
+          
+
+          const loadPosts = async () => {
+            
+            let results = await fetch(`http://localhost:5050/lands/getHarvest`).then(
+              (resp) => resp.json()
+            );
+            const convertedResults = results.map((obj) => {
+              return {
+                id:obj._id,
+                plotL: obj.geo_loc,
+                Sdate: obj.Harvest_SDate,
+                Edate: obj.Harvest_EDate,
+                method: obj.Harvest_Method,
+                weight: obj.Total_Weight,
+              };
+            });
+            console.log(convertedResults);
+            setData(convertedResults);
+          };
+        
+          useEffect(() => {
+            loadPosts();
+          }, []);
 
 return (
   <div className='DataTable'>

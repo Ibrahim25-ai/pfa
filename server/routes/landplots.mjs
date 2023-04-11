@@ -65,7 +65,37 @@ router.post("/addLand", async (req, res) => {
       res.status(500).send({ message: "Error inserting data" });
     }
   });
-
+  router.get("/getHarvest", async (req, res) => {
+  
+    const cursor = db.collection("Harvest").aggregate([
+      {
+        $lookup: {
+          from: "landPlots",
+          localField: "land_id",
+          foreignField: "land_id",
+          as: "landplot",
+        },
+      },
+      {
+        $unwind: "$landplot",
+      },
+      {
+        $project: {
+          _id: 1,
+          land_id: 1,
+          Harvest_SDate: 1,
+          Harvest_EDate: 1,
+          Harvest_Method: 1,
+          Storage_Temperature: 1,
+          Total_Weight: 1,
+          geo_loc: "$landplot.geo_loc",
+        },
+      },
+    ]);
+  
+    const results = await cursor.toArray();
+    res.send(results);
+});
   /*router.delete("/deleteLand/:id", async (req, res) => {
     const id = req.params.id;
     try {

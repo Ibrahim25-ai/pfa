@@ -33,7 +33,7 @@ function AddLandPlot() {
 
       const instance = await contract.deployed();
       const result = await instance.addLand(Gval, Tval, Aval, Nval, owner, { from: owner });
-   
+    
       const data = {
         land_id : result.logs[0].args[0],
         geo_loc: Gval,
@@ -67,7 +67,7 @@ function AddLandPlot() {
 
     
   };
-  console.log(landID);
+
   return (
     <div>
       <div id='cont' className='container mx-auto '>

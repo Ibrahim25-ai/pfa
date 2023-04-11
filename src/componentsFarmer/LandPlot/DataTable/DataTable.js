@@ -11,8 +11,8 @@ const DataTable = () => {
   const handleClick1 = (params) => {
     navigate("../../Trees", { state: { landid: params.row.land_id } });
   };
-  const handleClick2 = () => {
-    navigate("../../Harvest");
+  const handleClick2 = (params) => {
+    navigate("../../Harvest",{ state: { landid: params.row.land_id } });
   };
 
   const actionColumn = [
@@ -27,7 +27,7 @@ const DataTable = () => {
               <FaRegEye className="icon" />
               &ensp;View Details
             </div>
-            <div className="viewButton2" onClick={handleClick2}>
+            <div className="viewButton2" onClick={() => handleClick2(params)}>
               <FaLeaf className="icon" />
               &ensp;Harvest
             </div>

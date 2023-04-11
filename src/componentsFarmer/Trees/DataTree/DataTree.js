@@ -47,7 +47,7 @@ const DataTree = () => {
 
         const location = useLocation();
         const { landid } = location.state;
-        
+      
         const loadTrees = async () => {
             
             const requestBody = {
@@ -55,7 +55,7 @@ const DataTree = () => {
             };
 
             
-            console.log(landid);
+        
                 const options = {
                 method: "POST",
                 headers: {
@@ -72,7 +72,6 @@ const DataTree = () => {
                 nb: obj.nbTrees
               };
             });
-            console.log(convertedResults);
             setData(convertedResults);
         };
 

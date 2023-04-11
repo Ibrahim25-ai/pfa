@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
 import './Harvest.css'
 import NavBar from '../../NavBar/NavBar';
+import Web3 from 'web3';
+import truffleContract from 'truffle-contract';
+import { useLocation } from 'react-router-dom';
+import SupplyChain from './SupplyChain.json';
 
 
 function Harvest() {
-
+  const location = useLocation();
+  const { landid } = location.state;
   const [Dval,setDval]= useState("");
   const [Eval,setEval]= useState("");
   const [Tval,setTval]= useState("");
@@ -13,13 +18,28 @@ function Harvest() {
 
 
 
-  function handlesubmit(event) {
+  const handlesubmit = async (event) =>  {
     event.preventDefault();
-    
+    const provider = window.ethereum;
+    const web3 = new Web3(provider);
+    await provider.enable();
+
+    const contract = truffleContract(SupplyChain);
+    contract.setProvider(provider);
+
+    const accounts = await web3.eth.getAccounts();
+    const owner = accounts[0];
+
+    try {
+      const instance = await contract.deployed();
+        
+      await instance.oliveHarvestItem(landid, { from: owner });
+      
     const data = {
-      Harvest_Date: Dval,
+      land_id: landid,
+      Harvest_SDate: Dval,
+      Harvest_EDate: Eval,
       Harvest_Method: Mval,
-     
       Storage_Temperature: Sval,
       Total_Weight: Tval,
     };
@@ -40,6 +60,9 @@ function Harvest() {
         console.error(error);
         // handle the error
       });
+    } catch (error) {
+      console.error(error);
+    }
   }
   
 

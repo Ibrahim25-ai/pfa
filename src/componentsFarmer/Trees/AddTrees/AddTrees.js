@@ -11,6 +11,7 @@ function AddTrees() {
   const [Nval,setNval]= useState("");
   const location = useLocation();
   const { landid } = location.state;
+ 
   const handlesubmit = async (event) => {
     event.preventDefault();
 
