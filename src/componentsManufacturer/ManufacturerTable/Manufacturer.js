@@ -1,9 +1,9 @@
 import React,{useState} from 'react';
-import './Table.css';
+import './Manufacturer.css';
 import NavBar from '../../NavBar/NavBar';
 import DataTableM from './DataTableM/DataTableM'
 
-function Table(){
+function Manufacturer(){
     return(
         <>
             <NavBar/>
@@ -16,4 +16,4 @@ function Table(){
         </>
     )
 }
-export default Table
+export default Manufacturer

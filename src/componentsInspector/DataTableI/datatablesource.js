@@ -1,0 +1,9 @@
+export const userColumns=[
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'nameM', headerName: 'Full Name of the Manufacturer ', width: 230},
+    { field: "factoryL", headerName: "Factory Location", width: 170,},
+    { field: "Pdate", headerName: "Production Date", width: 150,},
+    { field: "quantity", headerName: "Quantity (L)", width: 120 },
+    { field: "method", headerName: "Production Method", width: 150,},
+    { field: "temprature", headerName: "Smoke Point Temprature", width: 200,}
+]

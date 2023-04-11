@@ -11,12 +11,13 @@ import Harvest from './componentsFarmer/Harvest/Harvest';
 import DataTree from './componentsFarmer/Trees/DataTree/DataTree';
 import AddLandPlot from './componentsFarmer/LandPlot/AddLandPlot/AddLandPlot';
 import AddTrees from './componentsFarmer/Trees/AddTrees/AddTrees';
-import Table from './componentsManufacturer/Table/Table';
+import Manufacturer from './componentsManufacturer/ManufacturerTable/Manufacturer';
 import PackageOil from './componentsManufacturer/packageOil/packageOil';
-import ProduceOil from './componentsManufacturer/produceOil/produceOil';
-import DataTableM from './componentsManufacturer/Table/DataTableM/DataTableM';
-import DataOil from './componentsManufacturer/produceOil/DataOil/DataOil'
-import AddOil from './componentsManufacturer/produceOil/DataOil/DataOil'
+import DataTableM from './componentsManufacturer/ManufacturerTable/DataTableM/DataTableM';
+import AddOil from './componentsManufacturer/AddOil/AddOil'
+import Inspector from './componentsInspector/InspectorTable/Inspector';
+import DataTableI from './componentsInspector/DataTableI/DataTableI';
+
 
 function App() {
   return (
@@ -33,12 +34,13 @@ function App() {
           <Route path="/DataTree" element={<DataTree/>} />
           <Route path="/AddLandPlot" element={<AddLandPlot/>} />
           <Route path="/AddTrees" element={<AddTrees/>} />
-          <Route path="/Table" element={<Table/>} />
+          <Route path="/Manufacturer" element={<Manufacturer/>} />
           <Route path="/PackageOil" element={<PackageOil/>} />
-          <Route path="/ProduceOil" element={<ProduceOil/>} />
           <Route path="/DataTableM" element={<DataTableM/>} />
-          <Route path="/DataOil" element={<DataOil/>} />
-
+          <Route path="/AddOil" element={<AddOil/>} />
+          <Route path="/Inspector" element={<Inspector/>} />
+          <Route path="/DataTableI" element={<DataTableI/>} />
+          
         </Routes>
       </BrowserRouter>
       

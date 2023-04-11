@@ -5,15 +5,15 @@ import {userColumns} from './datatablesource'
 import { useNavigate } from 'react-router-dom';
 import {FaTrashAlt,FaLeaf,FaRegEye} from 'react-icons/fa';
 
+import AddOil from '../../AddOil/AddOil';
+import Popup from '../../../Popup';
 
-const DataTable = () => {
+
+const DataTableM = () => {
 
     let navigate = useNavigate();
-    const handleClick1 = () => {
-        navigate('../../produceOil');
-    };
 
-    const handleClick2 = () => {
+    const handleClick = () => {
         navigate('../../packageOil');
     };
 
@@ -21,12 +21,12 @@ const DataTable = () => {
         {
             field: "action",
             headerName: "ACTION",
-            width: 235,
+            width: 285,
             renderCell: (params) => {
               return (
                 <div className="cellAction">
-                    <div className='viewButton1' onClick={handleClick1}>Produce Oil</div>
-                    <div className='viewButton2' onClick={handleClick2}>Package Oil</div>
+                    <div className='viewButton1' onClick={() => setOpenPopup(true)}>Produce Oil</div> 
+                    <div className='viewButton2' onClick={handleClick}>Package Oil</div>
                     <div className='deleteButton' onClick={()=>handleDelete(params.row.id)}><FaTrashAlt/>&ensp;Delete</div>
                 </div>
 
@@ -35,11 +35,15 @@ const DataTable = () => {
           }
         ]
 
+        
+        
+
         const handleDelete = (id) => {
             setData(data.filter(item => item.id !== id))
           }
         
           const [data, setData] = useState([]);
+<<<<<<< HEAD:src/componentsManufacturer/Table/DataTableM/DataTableM.js
           
 
           const loadPosts = async () => {
@@ -64,6 +68,9 @@ const DataTable = () => {
           useEffect(() => {
             loadPosts();
           }, []);
+=======
+          const [OpenPopup, setOpenPopup] = useState(false);
+>>>>>>> 37912243f201d334de05a690cc2d28fa682852f3:src/componentsManufacturer/ManufacturerTable/DataTableM/DataTableM.js
 
 return (
   <div className='DataTable'>
@@ -74,7 +81,10 @@ return (
       pageSize={6}
       rowsPerPageOptions={[6]}
     />
+    <Popup OpenPopup={OpenPopup} setOpenPopup={setOpenPopup} >
+      <AddOil/>
+    </Popup>
   </div>
 )
 }
-export default DataTable;
+export default DataTableM;
