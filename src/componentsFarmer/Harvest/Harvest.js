@@ -9,7 +9,7 @@ import SupplyChain from './SupplyChain.json';
 
 function Harvest() {
   const location = useLocation();
-  const { landid } = location.state;
+  const { oliveid } = location.state;
   const [Dval,setDval]= useState("");
   const [Eval,setEval]= useState("");
   const [Tval,setTval]= useState("");
@@ -32,11 +32,11 @@ function Harvest() {
 
     try {
       const instance = await contract.deployed();
-        
-      await instance.oliveHarvestItem(landid, { from: owner });
+        console.log(oliveid)
+      await instance.oliveHarvestItem(oliveid, { from: owner });
       
     const data = {
-      land_id: landid,
+      olive_id: oliveid,
       Harvest_SDate: Dval,
       Harvest_EDate: Eval,
       Harvest_Method: Mval,

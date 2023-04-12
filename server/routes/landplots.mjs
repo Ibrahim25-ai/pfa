@@ -1,7 +1,7 @@
 import express from "express";
 import { ObjectId } from "mongodb";
 import db from "../db/conn.mjs";
-
+import db1 from "../db/conn1.mjs";
 const router = express.Router();
 
 
@@ -66,35 +66,76 @@ router.post("/addLand", async (req, res) => {
     }
   });
   router.get("/getHarvest", async (req, res) => {
-  
-    const cursor = db.collection("Harvest").aggregate([
-      {
-        $lookup: {
-          from: "landPlots",
-          localField: "land_id",
-          foreignField: "land_id",
-          as: "landplot",
-        },
-      },
-      {
-        $unwind: "$landplot",
-      },
-      {
-        $project: {
-          _id: 1,
-          land_id: 1,
-          Harvest_SDate: 1,
-          Harvest_EDate: 1,
-          Harvest_Method: 1,
-          Storage_Temperature: 1,
-          Total_Weight: 1,
-          geo_loc: "$landplot.geo_loc",
-        },
-      },
-    ]);
-  
+    try {
+    
+      const cursor = db.collection("Harvest").find();
+        // {
+        //   $lookup: {
+        //     from: "tree",
+        //     localField: "olive_id",
+        //     foreignField: "id",
+        //     as: "tree",
+        //   },
+        // },
+        // {
+        //   $unwind: "$tree",
+        // },
+        // {
+        //   $lookup: {
+        //     from: "landPlots",
+        //     localField: "tree.land_id",
+        //     foreignField: "land_id",
+        //     as: "land",
+        //   },
+        // },
+        // {
+        //   $unwind: "$land",
+        // },
+        // {
+        //   $lookup: {
+        //     from: "farmer",
+        //     localField: "land.farmer_id",
+        //     foreignField: "account",
+        //     as: "farmer",
+        //   },
+        // },
+        // {
+        //   $unwind: "$farmer",
+        // },
+      //   {
+      //     $project: {
+      //       olive_id: 1,
+      //       land_id: 1,
+      //       Harvest_SDate: 1,
+      //       Harvest_EDate: 1,
+      //       Harvest_Method: 1,
+      //       Storage_Temperature: 1,
+      //       Total_Weight: 1,
+      //       geo_loc: "$land.geo_loc",
+      //       // farmer_name: "$farmer.first_name",
+      //     },
+      //   },
+      // ]);
     const results = await cursor.toArray();
+    console.log(results);
     res.send(results);
+    }catch (error) {
+      console.log(error);
+   }
+    
+    
+});
+router.post("/produceOil", async (req, res) => {
+  const data = req.body; // assuming that the data is sent as the request body
+
+  try {
+    const result = await db1.collection("produceOil").insertOne(data);
+    console.log(`Inserted document with _id: ${result.insertedId}`);
+    res.status(201).send({ message: "Data inserted successfully" });
+  } catch (err) {
+    console.error(`Error inserting document: ${err}`);
+    res.status(500).send({ message: "Error inserting data" });
+  }
 });
   /*router.delete("/deleteLand/:id", async (req, res) => {
     const id = req.params.id;

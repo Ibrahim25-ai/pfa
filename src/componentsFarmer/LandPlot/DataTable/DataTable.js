@@ -3,7 +3,7 @@ import './DataTable.css';
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns } from "./datatablesource";
 import { useNavigate } from "react-router-dom";
-import { FaTrashAlt, FaLeaf, FaRegEye } from "react-icons/fa";
+import { FaTrashAlt, FaRegEye } from "react-icons/fa";
 
 const DataTable = () => {
   let navigate = useNavigate();
@@ -11,9 +11,7 @@ const DataTable = () => {
   const handleClick1 = (params) => {
     navigate("../../Trees", { state: { landid: params.row.land_id } });
   };
-  const handleClick2 = (params) => {
-    navigate("../../Harvest",{ state: { landid: params.row.land_id } });
-  };
+  
 
   const actionColumn = [
     {
@@ -27,10 +25,7 @@ const DataTable = () => {
               <FaRegEye className="icon" />
               &ensp;View Details
             </div>
-            <div className="viewButton2" onClick={() => handleClick2(params)}>
-              <FaLeaf className="icon" />
-              &ensp;Harvest
-            </div>
+            
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
@@ -64,7 +59,7 @@ const DataTable = () => {
         nb: obj.num_trees,
       };
     });
-    console.log(convertedResults);
+  
     setData(convertedResults);
   };
 

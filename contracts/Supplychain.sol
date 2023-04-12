@@ -90,8 +90,7 @@ contract SupplyChain
     ) public {
         address _LandID = address(uint160(uint(keccak256(abi.encodePacked(msg.sender, block.number))))); // generate a new unique Ethereum address
         // Add the new item as part of Harvest
-        require(_LandID != address(0), "Invalid Ethereum address");
-         LandPlot memory newLandPlot = LandPlot({
+        LandPlot memory newLandPlot = LandPlot({
             id_land : _LandID,
             geo_loc : _geoLoc,
             sail_typ : _sailTyp,
@@ -157,6 +156,7 @@ contract SupplyChain
         // Emit the appropriate event
         emit OliveProduced(_oliveID);
     }
+    
 
 }
 /*

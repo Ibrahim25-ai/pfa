@@ -52,7 +52,7 @@ const DataTableM = () => {
             );
             const convertedResults = results.map((obj) => {
               return {
-                id:obj._id,
+                id:obj.olive_id,
                 plotL: obj.geo_loc,
                 Sdate: obj.Harvest_SDate,
                 Edate: obj.Harvest_EDate,
@@ -62,6 +62,7 @@ const DataTableM = () => {
             });
             console.log(convertedResults);
             setData(convertedResults);
+            console.log(results);
           };
         
           useEffect(() => {

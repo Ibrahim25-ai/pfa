@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
+import Web3 from 'web3';
+import truffleContract from 'truffle-contract';
+import SupplyChain from './SupplyChain.json';
+import { useLocation } from 'react-router-dom';
 
-function AddOil() {
+function AddOil({}) {
 
   const [Pval,setPval]= useState("");
   const [Qval,setQval]= useState("");
@@ -8,8 +12,51 @@ function AddOil() {
   const [Sval,setSval]= useState("");
  
   
-  const handlesubmit=(event)=>{
+  const handlesubmit = async (event) =>{
     event.preventDefault();
+    const provider = window.ethereum;
+    const web3 = new Web3(provider);
+    await provider.enable();
+
+    const contract = truffleContract(SupplyChain);
+    contract.setProvider(provider);
+
+    const accounts = await web3.eth.getAccounts();
+    const owner = accounts[0];
+
+    try {
+      const instance = await contract.deployed();
+        
+      await instance.oliveProducetItem(owner,{ from: owner });
+      const data = {
+    
+        id: owner, 
+        prod_date:Pval,
+        quantity:Qval,
+        prod_meth:Mval,
+        spt:Sval,
+      };
+      fetch("http://localhost:5050/lands/produceOil", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            // do something with the response data
+          })
+          .catch(error => {
+            console.error(error);
+            // handle the error
+          });
+        console.log('Transaction completed!');
+        window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

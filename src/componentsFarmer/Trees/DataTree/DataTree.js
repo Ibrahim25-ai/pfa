@@ -1,12 +1,15 @@
 import React, { useState,useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import './DataTree.css';
-import {FaTrashAlt} from 'react-icons/fa';
+import {FaLeaf, FaTrashAlt} from 'react-icons/fa';
 import {userColumns} from '../datatreesource'
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 const DataTree = () => {
-
+  let navigate = useNavigate();
+  const handleClick2 = (params) => {
+    navigate("../../Harvest", { state: { oliveid: params.row.tree_id } });
+  };
 
     const actionColumn=[
         {
@@ -17,9 +20,23 @@ const DataTree = () => {
               
               return (
                 <div className="cellAction">
-                    <div className='deleteButton'  onClick={()=>handleDelete(params.row)}><FaTrashAlt/>&ensp;Delete</div>
+                  <div
+                    className="viewButton2"
+                    onClick={() => handleClick2(params)}
+                  >
+                    <FaLeaf className="icon" />
+                    &ensp;Harvest
+                  </div>
+                  <div className="cellAction">
+                    <div
+                      className="deleteButton"
+                      onClick={() => handleDelete(params.row)}
+                    >
+                      <FaTrashAlt />
+                      &ensp;Delete
+                    </div>
+                  </div>
                 </div>
-
               );
             }
           }
@@ -67,6 +84,7 @@ const DataTree = () => {
               const convertedResults = results.map(obj => {
               return {
                 id: obj._id, 
+                tree_id:obj.id,
                 type: obj.oliveVariety,
                 date: obj.plantDate,
                 nb: obj.nbTrees
