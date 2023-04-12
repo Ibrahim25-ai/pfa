@@ -3,17 +3,19 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import {userColumns} from './datatablesource'
 import { useNavigate } from 'react-router-dom';
-import {FaTrashAlt,FaLeaf,FaRegEye} from 'react-icons/fa';
+import {FaTrashAlt} from 'react-icons/fa';
 
-import AddOil from '../../AddOil/AddOil';
-import Popup from '../../../Popup';
 
 
 const DataTableM = () => {
 
     let navigate = useNavigate();
 
-    const handleClick = () => {
+    const handleClick1 = () => {
+      navigate('../../AddOil');
+  };
+    
+    const handleClick2 = () => {
         navigate('../../packageOil');
     };
 
@@ -25,8 +27,8 @@ const DataTableM = () => {
             renderCell: (params) => {
               return (
                 <div className="cellAction">
-                    <div className='viewButton1' onClick={() => setOpenPopup(true)}>Produce Oil</div> 
-                    <div className='viewButton2' onClick={handleClick}>Package Oil</div>
+                    <div className='viewButton1' onClick={handleClick1}>Produce Oil</div> 
+                    <div className='viewButton2' onClick={handleClick2}>Package Oil</div>
                     <div className='deleteButton' onClick={()=>handleDelete(params.row.id)}><FaTrashAlt/>&ensp;Delete</div>
                 </div>
 
@@ -69,7 +71,7 @@ const DataTableM = () => {
             loadPosts();
           }, []);
 
-          const [OpenPopup, setOpenPopup] = useState(false);
+          
 
 return (
   <div className='DataTable'>
@@ -80,9 +82,7 @@ return (
       pageSize={6}
       rowsPerPageOptions={[6]}
     />
-    <Popup OpenPopup={OpenPopup} setOpenPopup={setOpenPopup} >
-      <AddOil/>
-    </Popup>
+   
   </div>
 )
 }

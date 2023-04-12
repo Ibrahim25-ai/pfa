@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import Web3 from 'web3';
 import truffleContract from 'truffle-contract';
 import SupplyChain from './SupplyChain.json';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import NavBar from '../../NavBar/NavBar';
 
 function AddOil({}) {
 
@@ -10,6 +11,12 @@ function AddOil({}) {
   const [Qval,setQval]= useState("");
   const [Mval,setMval]= useState("");
   const [Sval,setSval]= useState("");
+
+  let navigate = useNavigate();
+
+    const handleClick = () => {
+      navigate('../Manufacturer');
+  };
  
   
   const handlesubmit = async (event) =>{
@@ -61,6 +68,7 @@ function AddOil({}) {
 
   return (
     <div>
+      <NavBar />
       <div id='cont' className='container mx-auto '>
        
       
@@ -90,7 +98,7 @@ function AddOil({}) {
                 <br/>
                                
                 
-                <button className="btn" type="submit">Add</button>
+                <button className="btn" type="submit" onClick={handleClick}>Add</button>
                 </div>
               </form>
           </div>
