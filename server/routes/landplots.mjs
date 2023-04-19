@@ -68,63 +68,59 @@ router.post("/addLand", async (req, res) => {
   router.get("/getHarvest", async (req, res) => {
     try {
     
-      const cursor = db.collection("Harvest").find();
-        // {
-        //   $lookup: {
-        //     from: "tree",
-        //     localField: "olive_id",
-        //     foreignField: "id",
-        //     as: "tree",
-        //   },
-        // },
-        // {
-        //   $unwind: "$tree",
-        // },
-        // {
-        //   $lookup: {
-        //     from: "landPlots",
-        //     localField: "tree.land_id",
-        //     foreignField: "land_id",
-        //     as: "land",
-        //   },
-        // },
-        // {
-        //   $unwind: "$land",
-        // },
-        // {
-        //   $lookup: {
-        //     from: "farmer",
-        //     localField: "land.farmer_id",
-        //     foreignField: "account",
-        //     as: "farmer",
-        //   },
-        // },
-        // {
-        //   $unwind: "$farmer",
-        // },
-      //   {
-      //     $project: {
-      //       olive_id: 1,
-      //       land_id: 1,
-      //       Harvest_SDate: 1,
-      //       Harvest_EDate: 1,
-      //       Harvest_Method: 1,
-      //       Storage_Temperature: 1,
-      //       Total_Weight: 1,
-      //       geo_loc: "$land.geo_loc",
-      //       // farmer_name: "$farmer.first_name",
-      //     },
-      //   },
-      // ]);
-    const results = await cursor.toArray();
-    console.log(results);
-    res.send(results);
-    }catch (error) {
+      const cursor = db.collection("Harvest").aggregate([
+        {
+          $lookup: {
+            from: "tree",
+            localField: "olive_id",
+            foreignField: "id",
+            as: "trees",
+          },
+        },
+        
+        {
+          $lookup: {
+            from: "landPlots",
+            localField: "trees.land_id",
+            foreignField: "land_id",
+            as: "lands",
+          },
+        },
+       
+        {
+          $lookup: {
+            from: "farmer",
+            localField: "lands.farmer_id",
+            foreignField: "account",
+            as: "farmers",
+          },
+        },
+        
+        {
+          $project: {
+            _id: 0,
+            Harvest_EDate: 1,
+            Harvest_Method: 1,
+            Harvest_SDate: 1,
+            Storage_Temperature: 1,
+            Total_Weight: 1,
+            olive_id: 1,
+            farmer_name: "$farmers.first_name",
+            landPlot_location: "$lands.geo_loc",
+          },
+        },
+      ]);
+      
+      const results = await cursor.toArray();
+      res.send(results);
+      }catch (error) {
       console.log(error);
    }
     
     
 });
+
+
 router.post("/produceOil", async (req, res) => {
   const data = req.body; // assuming that the data is sent as the request body
 

@@ -55,14 +55,15 @@ const DataTableM = () => {
             const convertedResults = results.map((obj) => {
               return {
                 id:obj.olive_id,
-                plotL: obj.geo_loc,
+                plotL: obj.landPlot_location,
                 Sdate: obj.Harvest_SDate,
                 Edate: obj.Harvest_EDate,
                 method: obj.Harvest_Method,
                 weight: obj.Total_Weight,
+                name: obj.farmer_name,
               };
             });
-            console.log(convertedResults);
+            //console.log(convertedResults);
             setData(convertedResults);
             console.log(results);
           };
