@@ -25,7 +25,7 @@ const DataTableM = () => {
         return (
           <div className="cellAction">
             <div>
-              { params.row.method === "meth1" && (
+              { !params.row.produced  && (
                 <div
                   className="viewButton1"
                   onClick={() => handleClick1(params)}
@@ -71,11 +71,21 @@ const DataTableM = () => {
                 method: obj.Harvest_Method,
                 weight: obj.Total_Weight,
                 name: obj.farmer_name,
+                produced: false, 
               };
+            });
+            let results1 = await fetch(`http://localhost:5050/lands/ProducedOil`).then(
+              (resp) => resp.json()
+            );
+            convertedResults.forEach((obj) => {
+              if (results1.some((item) => item.id === obj.id)) {
+                obj.produced = true;
+              }
             });
             //console.log(convertedResults);
             setData(convertedResults);
-            console.log(results);
+            console.log(convertedResults);
+            console.log(results1);
           };
         
           useEffect(() => {

@@ -39,6 +39,7 @@ contract SupplyChain
     }
     // Define a struct 'oliveItem' with the following fields:
     struct OliveItem {
+        address oliveID;
         address ownerID; // Metamask-Ethereum address of the current owner as the product moves through stages
         uint landID; // Metamask-Ethereum address of the Farmer
         string numberTree; // number Tree
@@ -116,7 +117,10 @@ contract SupplyChain
 
         
     ) public {
+        address _oliveID = address(uint160(uint(keccak256(abi.encodePacked(msg.sender, block.number))))); // generate a new unique Ethereum address
+
         OliveItem memory newOliveItem = OliveItem({
+            oliveID:_oliveID,
             ownerID : ownerID,
             landID : landID,
             numberTree : numberTree,
@@ -124,7 +128,6 @@ contract SupplyChain
             plantingDate : plantingDate,
             itemState : OliveState.Planted
             });
-        address _oliveID = address(uint160(uint(keccak256(abi.encodePacked(msg.sender, block.number))))); // generate a new unique Ethereum address
 
         oliveItems[_oliveID] = newOliveItem;
         

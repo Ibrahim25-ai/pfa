@@ -73,7 +73,7 @@ router.post("/addLand", async (req, res) => {
           $lookup: {
             from: "tree",
             localField: "olive_id",
-            foreignField: "id",
+            foreignField: "olive_id",
             as: "trees",
           },
         },
@@ -112,6 +112,7 @@ router.post("/addLand", async (req, res) => {
       ]);
       
       const results = await cursor.toArray();
+      
       res.send(results);
       }catch (error) {
       console.log(error);
@@ -120,6 +121,15 @@ router.post("/addLand", async (req, res) => {
     
 });
 
+router.get("/ProducedOil", async (req, res) => {
+  
+
+  const cursor = db1.collection("produceOil").find();
+
+  const results = await cursor.toArray();
+  console.log(results);
+  res.send(results);
+});
 
 router.post("/produceOil", async (req, res) => {
   const data = req.body; // assuming that the data is sent as the request body
