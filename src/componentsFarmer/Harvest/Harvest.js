@@ -32,10 +32,11 @@ function Harvest() {
 
     try {
       const instance = await contract.deployed();
-        console.log(oliveid)
+        
       await instance.oliveHarvestItem(oliveid, { from: owner });
       
     const data = {
+      id:owner,
       olive_id: oliveid,
       Harvest_SDate: Dval,
       Harvest_EDate: Eval,

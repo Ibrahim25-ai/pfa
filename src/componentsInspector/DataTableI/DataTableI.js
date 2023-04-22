@@ -37,6 +37,34 @@ const DataTableI = () => {
           }
         
           const [data, setData] = useState([]);
+          const loadPosts = async () => {
+            
+            let results = await fetch(`http://localhost:5050/lands/ProducedOil`).then(
+              (resp) => resp.json()
+            );
+            const convertedResults = results.map((obj) => {
+              
+              return {
+                id:obj.id,
+              
+  
+                Pdate: obj.prod_date,
+                quantity: obj.quantity,
+                method: obj.prod_meth,
+                temprature: obj.spt,
+        
+              };
+            });
+           
+            //console.log(convertedResults);
+            setData(convertedResults);
+            console.log(convertedResults);
+            
+          };
+        
+          useEffect(() => {
+            loadPosts();
+          }, []);
           
 
 return (

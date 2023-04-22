@@ -28,9 +28,9 @@ function AddTrees() {
     try {
       const instance = await contract.deployed();
         
-      await instance.olivePlantItem(owner, landid, Nval, Vval,Dval, { from: owner });
+      const result = await instance.olivePlantItem(owner, landid, Nval, Vval,Dval, { from: owner });
       const data = {
-    
+        olive_id: result.logs[0].args[0],
         id: owner, 
         oliveVariety: Vval,
         plantDate: Dval,

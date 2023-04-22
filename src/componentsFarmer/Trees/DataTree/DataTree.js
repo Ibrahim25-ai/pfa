@@ -84,12 +84,13 @@ const DataTree = () => {
               const convertedResults = results.map(obj => {
               return {
                 id: obj._id, 
-                tree_id:obj.id,
+                tree_id:obj.olive_id,
                 type: obj.oliveVariety,
                 date: obj.plantDate,
                 nb: obj.nbTrees
               };
             });
+            console.log(convertedResults);
             setData(convertedResults);
         };
 
