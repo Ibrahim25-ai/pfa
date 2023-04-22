@@ -8,8 +8,7 @@ pragma solidity  >=0.4.22;
 contract SupplyChain
    
 {
-    // Define a variable called 'sku' for Stock Keeping Unit (SKU)
-    uint256 sku_cnt;
+    
     // olive_upc -> oliveItem
     mapping(address => LandPlot) landPlots;
 
@@ -149,7 +148,8 @@ contract SupplyChain
         address _oliveID
 
     ) public  isHarvested(_oliveID) {
-        
+         // Add the new item as part of Harvest
+        oliveItems[_oliveID].ownerID = msg.sender;
         
         // Update state
         oliveItems[_oliveID].itemState = OliveState.produced;

@@ -2,21 +2,19 @@ import React, {useState} from 'react';
 import Web3 from 'web3';
 import truffleContract from 'truffle-contract';
 import SupplyChain from './SupplyChain.json';
-import { useNavigate } from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
 import NavBar from '../../NavBar/NavBar';
 
-function AddOil({}) {
+function AddOil() {
 
   const [Pval,setPval]= useState("");
   const [Qval,setQval]= useState("");
   const [Mval,setMval]= useState("");
   const [Sval,setSval]= useState("");
 
-  let navigate = useNavigate();
 
-    const handleClick = () => {
-      navigate('../Manufacturer');
-  };
+  const location = useLocation();
+  const { oliveid } = location.state;
  
   
   const handlesubmit = async (event) =>{
@@ -34,10 +32,10 @@ function AddOil({}) {
     try {
       const instance = await contract.deployed();
         
-      await instance.oliveProducetItem(owner,{ from: owner });
+      await instance.oliveProducetItem(oliveid,{ from: owner });
       const data = {
     
-        id: owner, 
+        id: oliveid, 
         prod_date:Pval,
         quantity:Qval,
         prod_meth:Mval,
@@ -98,7 +96,7 @@ function AddOil({}) {
                 <br/>
                                
                 
-                <button className="btn" type="submit" onClick={handleClick}>Add</button>
+                <button className="btn" type="submit" >Add</button>
                 </div>
               </form>
           </div>
