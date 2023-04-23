@@ -15,7 +15,7 @@ const DataTree = () => {
         {
             field: "action",
             headerName: "ACTION",
-            width: 110,
+            width: 170,
             renderCell: (params) => {
               
               return (
