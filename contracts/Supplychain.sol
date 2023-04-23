@@ -18,6 +18,9 @@ contract SupplyChain
     // oil_upc -> olive_upc[]
     mapping(uint256 => uint256[]) oilolives;
 
+    // olive_upc -> certificationItem[]
+    mapping(address => CertificationItem[]) oliveCertifications;
+
     // Define enum 'State' with the following values:
     enum OliveState {
         Planted,
@@ -47,8 +50,16 @@ contract SupplyChain
         string plantingDate; // planting Date
         OliveState itemState; // Product State as represented in the enum above
     }
-
-   
+struct CertificationItem {
+        address certID; // Metamask-Ethereum address of the certification item
+        string certName; // name of the certification
+        string certAgency; // certification agency
+        string certDate; // certification date
+        string certValidUntil; // certification validity period
+        address oliveID; // Metamask-Ethereum address of the olive item being certified
+        string ipfsUrl;
+    }
+  
 
     // Define events of olives
     event LandCreated(address _idLand);
@@ -158,6 +169,41 @@ contract SupplyChain
         oliveItems[_oliveID].itemState = OliveState.produced;
         // Emit the appropriate event
         emit OliveProduced(_oliveID);
+    }
+    function createCertification(
+        address _oliveID,
+        string memory _certName,
+        string memory _certAgency,
+        string memory _certDate,
+        string memory _certValidUntil,
+        string memory _ipfsURL
+    ) public {
+        // Verify that the caller is an authorized certifying body
+
+        
+        // Verify that the olive item being certified exists
+        require(oliveItems[_oliveID].ownerID != address(0), "Olive item does not exist");
+        
+        // Generate a new unique Ethereum address for the certification item
+        address _certID = address(uint160(uint(keccak256(abi.encodePacked(msg.sender, block.number))))); 
+        
+        // Create the new certification item
+        CertificationItem memory newCertificationItem = CertificationItem({
+            certID : _certID,
+            certName : _certName,
+            certAgency : _certAgency,
+            certDate : _certDate,
+            certValidUntil : _certValidUntil,
+            oliveID : _oliveID,
+            ipfsUrl : _ipfsURL
+        });
+        
+        // Add the new certification item to the list of certifications for the olive item
+        oliveCertifications[_oliveID].push(newCertificationItem);
+    }
+     // Define a function 'getCertifications' that returns the list of certifications for a given olive item
+    function getCertifications(address _oliveID) public view returns (CertificationItem[] memory) {
+        return oliveCertifications[_oliveID];
     }
     
 
