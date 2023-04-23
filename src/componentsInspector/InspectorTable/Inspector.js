@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 
 import NavBar from '../../NavBar/NavBar';
-import DataTableI from '../DataTableI/DataTableI'
+import DataTableI from './DataTableI/DataTableI'
 
 function Inspector(){
     return(

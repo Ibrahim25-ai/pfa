@@ -2,14 +2,18 @@ import React, { useState,useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 import {userColumns} from './datatablesource'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {FaTrashAlt,FaLeaf,FaRegEye} from 'react-icons/fa';
 
 
 
 
 const DataTableI = () => {
-
+  
+  let navigate = useNavigate();
+  const handleClick = () => {
+    navigate("../../Sheet");
+  };
     
 
     const actionColumn=[
@@ -20,7 +24,7 @@ const DataTableI = () => {
             renderCell: (params) => {
               return (
                 <div className="cellAction"> 
-                    <div className='viewButton2'>Certification</div>
+                    <div className='viewButton2'onClick={handleClick()}>Certification</div>
                     <div className='deleteButton' onClick={()=>handleDelete(params.row.id)}><FaTrashAlt/>&ensp;Delete</div>
                 </div>
 

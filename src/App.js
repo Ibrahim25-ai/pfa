@@ -16,8 +16,9 @@ import PackageOil from './componentsManufacturer/packageOil/packageOil';
 import DataTableM from './componentsManufacturer/ManufacturerTable/DataTableM/DataTableM';
 import AddOil from './componentsManufacturer/AddOil/AddOil'
 import Inspector from './componentsInspector/InspectorTable/Inspector';
-import DataTableI from './componentsInspector/DataTableI/DataTableI';
-
+import DataTableI from './componentsInspector/InspectorTable/DataTableI/DataTableI';
+import Sheet from './componentsInspector/Sheet/sheet'
+import DataTableS from './componentsInspector/Sheet/DataTableS/DataTableS'
 
 function App() {
   return (
@@ -40,7 +41,8 @@ function App() {
           <Route path="/AddOil" element={<AddOil/>} />
           <Route path="/Inspector" element={<Inspector/>} />
           <Route path="/DataTableI" element={<DataTableI/>} />
-          
+          <Route path="/Sheet" element={<Sheet/>} />
+          <Route path="/DataTableS" element={<DataTableS/>} />
         </Routes>
       </BrowserRouter>
       
