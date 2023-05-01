@@ -67,7 +67,7 @@ const DataTableS = ({ onValidate }) => {
   return (
     <div className='DataTable' style={{ height: 424, width: '100%' }}>
       <DataGrid rows={tableData} columns={columns} hideFooterPagination />
-      <button onClick={handleValidateClick}>Validate</button>
+
       {validationResults.isAllValid ? (
         <p>All results are valid!</p>
       ) : (

@@ -61,7 +61,6 @@ for await (const chunk of stream) {
   da1ta += decoder.decode(chunk, { stream: true })
 }
 
-console.log(convertedResults[0].name);
 
     /* inserted in the smart contract to get the hash*/
     const result2 = await instance.createCertification(oliveid,convertedResults[0].name.toString(),"test",convertedResults[0].Sdate.toString(),convertedResults[0].Edate.toString(), cid.toString(), { from: owner });

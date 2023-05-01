@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Web3 from 'web3';
 import truffleContract from 'truffle-contract';
-import SupplyChain from './SupplyChain.json';
+import SupplyChain from '../../contracts/SupplyChain.json';
 import { useLocation} from 'react-router-dom';
 import NavBar from '../../NavBar/NavBar';
 
@@ -58,7 +58,7 @@ function AddOil() {
             // handle the error
           });
         console.log('Transaction completed!');
-        window.location.reload();
+        window.location.replace("http://localhost:3000/manufacturer");
     } catch (error) {
       console.error(error);
     }
