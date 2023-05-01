@@ -2,7 +2,7 @@
 
 pragma solidity  >=0.4.22;
 
-
+pragma experimental ABIEncoderV2;
 
 // Define a contract 'Supplychain'
 contract SupplyChain

@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import { DataGrid} from '@mui/x-data-grid';
 
-
-
-
-
-
-const DataTableS = () => {
-    // Initialize state for the table data
+const DataTableS = ({ onValidate }) => {
+  // Initialize state for the table data
   const [tableData, setTableData] = useState([
     { id: 1, criteria: 'Quality of the olives', standard: 'Healthy, fresh, fully ripened', result: '' },
     { id: 2, criteria: 'Extraction process', standard: 'Modern and efficient equipment', result: '' },
@@ -16,6 +11,12 @@ const DataTableS = () => {
     { id: 5, criteria: 'Color', standard: 'Greenish-golden, free from sediment or cloudiness', result: '' },
     { id: 6, criteria: 'Packaging and labeling', standard: 'Complies with relevant standards and regulations', result: '' },
   ]);
+
+  // Initialize state for the validation results
+  const [validationResults, setValidationResults] = useState({
+    isAllValid: false,
+    invalidRows: []
+  });
 
   // Handle changes to the table cell data
   const handleTableCellChange = (params, event) => {
@@ -27,7 +28,22 @@ const DataTableS = () => {
     });
     setTableData(updatedData);
   };
-  
+
+  // Handle validation when the "Validate" button is clicked
+  const handleValidateClick = () => {
+    const invalidRows = tableData.filter((row) => {
+      const result = row.result.trim();
+      return result === '' || result.toLowerCase() === 'fail';
+    });
+
+    const isAllValid = invalidRows.length === 0;
+
+    setValidationResults({ isAllValid, invalidRows });
+
+    if (onValidate) {
+      onValidate(isAllValid);
+    }
+  };
 
   // Define the columns of the DataGrid
   const columns = [
@@ -46,18 +62,23 @@ const DataTableS = () => {
         />
       ),
     },
-  ];     
-            
+  ];
 
-           
-           
-
-          
-
-return (
+  return (
     <div className='DataTable' style={{ height: 424, width: '100%' }}>
-          <DataGrid rows={tableData} columns={columns} hideFooterPagination />
+      <DataGrid rows={tableData} columns={columns} hideFooterPagination />
+      <button onClick={handleValidateClick}>Validate</button>
+      {validationResults.isAllValid ? (
+        <p>All results are valid!</p>
+      ) : (
+        <ul>
+          {validationResults.invalidRows.map((row) => (
+            <li key={row.id}>{`Row ${row.id}: ${row.criteria}`}</li>
+          ))}
+        </ul>
+      )}
     </div>
-)
-}
+  );
+};
+
 export default DataTableS;

@@ -5,16 +5,15 @@ import {userColumns} from './datatablesource'
 import { useNavigate } from "react-router-dom";
 import {FaTrashAlt,FaLeaf,FaRegEye} from 'react-icons/fa';
 
-import ipfsClient from 'ipfs-http-client';
+
 
 
 const DataTableI = () => {
-  
   let navigate = useNavigate();
-  const handleClick = () => {
-    navigate("../../Sheet");
+  const handleClick2 = (params) => {
+    navigate("../../Sheet", { state: { oliveid: params.row.id } });
   };
-    
+   
 
     const actionColumn=[
         {
@@ -24,7 +23,7 @@ const DataTableI = () => {
             renderCell: (params) => {
               return (
                 <div className="cellAction"> 
-                    <div className='viewButton2'onClick={handleClick()}>Certification</div>
+                    <div className='viewButton2'onClick={() =>handleClick2(params)}>Certification</div>
                     <div className='deleteButton' onClick={()=>handleDelete(params.row.id)}><FaTrashAlt/>&ensp;Delete</div>
                 </div>
 
@@ -43,30 +42,7 @@ const DataTableI = () => {
           const [data, setData] = useState([]);
 
           
-          const loadcertif = async () => {
-            
-            let results = await fetch(`http://localhost:5050/lands/ProducedOil`).then(
-              (resp) => resp.json()
-            );
-            const convertedResults = results.map((obj) => {
-              
-              return {
-                id:obj.id,
-              
-  
-                Pdate: obj.prod_date,
-                quantity: obj.quantity,
-                method: obj.prod_meth,
-                temprature: obj.spt,
-        
-              };
-            });
-           
-            //console.log(convertedResults);
-            setData(convertedResults);
-            console.log(convertedResults);
-            
-          };
+          
           const loadPosts = async () => {
             
             let results = await fetch(`http://localhost:5050/lands/ProducedOil`).then(

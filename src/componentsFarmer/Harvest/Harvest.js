@@ -4,7 +4,8 @@ import NavBar from '../../NavBar/NavBar';
 import Web3 from 'web3';
 import truffleContract from 'truffle-contract';
 import { useLocation } from 'react-router-dom';
-import SupplyChain from './SupplyChain.json';
+import SupplyChain from '../../contracts/SupplyChain.json';
+
 
 
 function Harvest() {
