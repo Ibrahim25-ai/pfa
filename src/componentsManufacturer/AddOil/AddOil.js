@@ -76,22 +76,26 @@ function AddOil() {
           <div className='harvest-contain'>
 
             <div  className="titleflex flex-col items-center">
-                <h6 className="text-3xl front-blod" style={{color : 'olive', paddingBottom: 20}}>Add Oil</h6>
+                <h6 className="text-3xl front-blod" style={{color : 'rgb(42, 128, 0)', paddingBottom: 20}}>Add Oil</h6>
             </div>
 
             <form className="py-1" onSubmit={handlesubmit}>
               <div className="flex flex-col item-center gap-2 ">
                 
                     
-              <div className='name flex w-2/3 gap-20' style={{width : "100%"}}>
-                    <input className='textbox' placeholder='Production Date' type='text' value={Pval}
+              <div className='name flex w-2/3 gap-5' style={{width : "100%"}}>
+                    <label className="input-label" htmlFor="date-input">Production &nbsp;&nbsp;&nbsp; Date</label>
+                    <input className='textbox' id='date-input' type='date' value={Pval}
                         onChange={(e)=>{setPval(e.target.value)}}/>
-                    <input className='textbox' placeholder='Quantity (L)' type='text' value={Qval}
+                    <label className="input-label" htmlFor="quantity-input">Quantity &nbsp;&nbsp;&nbsp; (L)</label>
+                    <input className='textbox' id='quantity-input' type='text' value={Qval}
                         onChange={(e)=>{setQval(e.target.value)}} /> 
                 </div>  
-                <input className='textbox' placeholder='Production Method' type='text' value={Mval}
+                <label className="input-label" htmlFor="method-input">Production Method</label>
+                <input className='textbox' id='method-input' type='text' value={Mval}
                         onChange={(e)=>{setMval(e.target.value)}}/>
-                <input className='textbox' placeholder='Smoke Point Temprature' type='text' value={Sval}
+                <label className="input-label" htmlFor="temprature-input">Smoke Point Temprature</label>
+                <input className='textbox' id='temprature-input' type='text' value={Sval}
                         onChange={(e)=>{setSval(e.target.value)}} />
                 <br/>
                                

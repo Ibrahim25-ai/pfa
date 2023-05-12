@@ -77,28 +77,32 @@ function AddLandPlot() {
           <div className='harvest-contain'>
 
             <div  className="titleflex flex-col items-center">
-                <h6 className="text-3xl front-blod" style={{color : 'olive', paddingBottom: 20}}>Add Land Plot</h6>
+                <h6 className="text-3xl front-blod" style={{color : 'rgb(42, 128, 0)', paddingBottom: 20}}>Add Land Plot</h6>
             </div>
 
             <form className="py-1" onSubmit={handlesubmit}>
-              <div className="flex flex-col item-center gap-2 ">
-                
-                    
-                
-                <input className='textbox' placeholder='Geographic Location' type='text' value={Gval}
-                        onChange={(e)=>{setGval(e.target.value)}}/>
-                <input className='textbox' placeholder='Soil Type' type='text' value={Tval}
-                        onChange={(e)=>{setTval(e.target.value)}} />
-                               
-                <div className='name flex w-2/3 gap-20' style={{width : "100%"}}>
-                    <input className='textbox' placeholder='Altitude' type='text' value={Aval}
-                        onChange={(e)=>{setAval(e.target.value)}}/>
-                    <input className='textbox' placeholder='Number of Trees' type='text' value={Nval}
-                        onChange={(e)=>{setNval(e.target.value)}} /> 
-                </div>  
-                <br/>
-                <button className="btn" type="submit">Add</button>
+              <div className="flex flex-col item-center gap-2">
+                <div className="input-container">
+                  <label className="input-label" htmlFor="location-input">Geographic Location</label>
+                  <input className="textbox" id="location-input" type="text" value={Gval} onChange={(e) => setGval(e.target.value)} />
                 </div>
+                <div className="input-container">
+                  <label className="input-label" htmlFor="soil-input">Soil Type</label>
+                  <input className="textbox" id="soil-input" type="text" value={Tval} onChange={(e) => setTval(e.target.value)} />
+                </div>
+                <div className="name flex w-2/3 gap-20" style={{ width: "100%" }}>
+                  <div className="input-container">
+                    <label className="input-label" htmlFor="altitude-input">Altitude</label>
+                    <input className="textbox" id="altitude-input" type="text" value={Aval} onChange={(e) => setAval(e.target.value)} />
+                  </div>
+                  <div className="input-container">
+                    <label className="input-label" htmlFor="trees-input">Number of Trees</label>
+                    <input className="textbox" id="trees-input" type="text" value={Nval} onChange={(e) => setNval(e.target.value)} />
+                  </div>
+                </div>
+                <button className="btn" type="submit">Add</button>
+              </div>
+
               </form>
           </div>
 

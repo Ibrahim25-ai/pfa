@@ -15,7 +15,7 @@ const DataTree = () => {
         {
             field: "action",
             headerName: "ACTION",
-            width: 170,
+            width: 202,
             renderCell: (params) => {
               
               return (
@@ -100,7 +100,7 @@ loadTrees();
     return (
         <div className='DataTree'>
                 <DataGrid className="dataGrid"
-                    style={{ height: '100%'}}
+                    style={{ height: 423 }}
                     rows={data}
                     columns={userColumns.concat(actionColumn)}
                     pageSize={6}

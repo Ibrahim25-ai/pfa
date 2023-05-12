@@ -32,7 +32,7 @@ function Settings() {
           <div className='settings-contain'>
 
             <div className="titleflex flex-col items-center">
-            <h6 className="text-3xl front-blod" style={{color : 'olive'}}>Account Details</h6>
+            <h6 className="text-3xl front-blod" style={{color : 'rgb(42, 128, 0)'}}>Account Details</h6>
             </div>
 
             <div className='profile flex justify-center py-3'>

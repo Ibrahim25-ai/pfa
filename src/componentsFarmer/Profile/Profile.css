@@ -42,7 +42,7 @@
   }
   .btn{
     border: 1px solid;
-    background-color:olive;
+    background-color:rgb(42, 128, 0);
     width: 100%;
     padding-top: 5px;
   
@@ -55,7 +55,7 @@
 }
 
 .btn:hover{
-    background-color: rgb(138, 138, 61);
+    background-color: rgb(56, 114, 27);
 }
 
 input[type='file'] {

@@ -1,0 +1,10 @@
+.DataIns{
+    
+        background: rgba(255, 255, 255, 0.55);
+        box-shadow: 0 4px 30px #4747470b;
+        backdrop-filter: blur(7.1px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        margin: auto;
+        width: 87%;
+    
+}

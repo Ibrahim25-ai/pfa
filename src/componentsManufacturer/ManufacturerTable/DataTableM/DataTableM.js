@@ -12,15 +12,13 @@ const DataTableM = () => {
     navigate("../../AddOil", { state: { oliveid: params.row.id } });
   };
 
-  const handleClick2 = () => {
-    navigate("../../packageOil");
-  };
+
 
   const actionColumn = [
     {
       field: "action",
       headerName: "ACTION",
-      width: 285,
+      width: 235,
       renderCell: (params,test) => {
         return (
           <div className="cellAction">
@@ -34,9 +32,7 @@ const DataTableM = () => {
                 </div>
               )}
             </div>
-            <div className="viewButton2" onClick={handleClick2}>
-              Package Oil
-            </div>
+
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
