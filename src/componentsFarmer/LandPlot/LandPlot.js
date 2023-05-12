@@ -23,8 +23,9 @@ function LandPlot(){
                     <DataTable/>
                 </div>
                 <Popup OpenPopup={OpenPopup} setOpenPopup={setOpenPopup} >
-                    <AddLandPlot/>
+                    <AddLandPlot />
                 </Popup>
+
             </div>
     )
 }

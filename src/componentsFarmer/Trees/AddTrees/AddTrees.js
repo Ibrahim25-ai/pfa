@@ -71,19 +71,23 @@ function AddTrees() {
           <div className='harvest-contain'>
 
             <div  className="titleflex flex-col items-center">
-                <h6 className="text-3xl front-blod" style={{color : 'olive', paddingBottom: 20}}>Add Trees</h6>
+                <h6 className="text-3xl front-blod" style={{color : 'rgb(42, 128, 0)', paddingBottom: 20}}>Add Trees</h6>
             </div>
 
             <form className="py-1" onSubmit={handlesubmit}>
               <div className="flex flex-col item-center gap-2 ">
                 
                     
-                
-                <input className='textbox' placeholder='Number of Trees' type='text' value={Nval}
+                <label className="input-label" htmlFor="number-input">Number of Trees</label>
+                <input className='textbox' id='number-input' type='text' value={Nval}
                         onChange={(e)=>{setNval(e.target.value)}}/>
-                <input className='textbox' placeholder='Olive Variety' type='text' value={Vval}
+
+                <label className="input-label" htmlFor="variety-input">Olive Variety</label>
+                <input className='textbox' id='variety-input' type='text' value={Vval}
                         onChange={(e)=>{setVval(e.target.value)}} />
-                <input className='textbox' placeholder='Planting Date' type='text' value={Dval}
+
+                <label className="input-label" htmlFor="date-input">Planting Date</label>
+                <input className='textbox' id='date-input' type='date' value={Dval}
                         onChange={(e)=>{setDval(e.target.value)}}/>
                                
                 <br/>

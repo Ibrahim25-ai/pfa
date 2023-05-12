@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-
+import './DataTableI.css'
 import {userColumns} from './datatablesource'
 import { useNavigate } from "react-router-dom";
 import {FaTrashAlt,FaLeaf,FaRegEye} from 'react-icons/fa';
@@ -74,9 +74,9 @@ const DataTableI = () => {
           
 
 return (
-  <div className='DataTable'>
+  <div className='DataIns' >
     <DataGrid
-      style={{ height: 423 }}
+      style={{ height: 423}}
       rows={data}
       columns={userColumns.concat(actionColumn)}
       pageSize={6}

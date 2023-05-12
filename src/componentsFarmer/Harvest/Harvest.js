@@ -80,27 +80,35 @@ function Harvest() {
           <div className='harvest-contain'>
 
             <div  className="titleflex flex-col items-center">
-                <h6 className="text-3xl front-blod" style={{color : 'olive', paddingBottom: 20}}>Harvest Details</h6>
+                <h6 className="text-3xl front-blod" style={{color : 'rgb(42, 128, 0)', paddingBottom: 20}}>Harvest Details</h6>
             </div>
 
             <form className="py-1" onSubmit={handlesubmit}>
               <div className="flex flex-col item-center gap-2 ">
                 
-                <div className='name flex w-2/3 gap-20' style={{width : "100%"}}>
-                    <input className='textbox' placeholder='Start Date' type='text' value={Dval}
-                        onChange={(e)=>{setDval(e.target.value)}}/>
-                    <input className='textbox' placeholder='End Date' type='text' value={Eval}
-                        onChange={(e)=>{setEval(e.target.value)}}/>
-                </div>      
-                
-                <input className='textbox' placeholder='Harvest Method' type='text' value={Mval}
+              <div className='name flex w-2/3 gap-5' style={{ width: "100%" }}>
+  <label className="input-label" htmlFor="start-input" style={{ marginTop: "5px" }}>Start Date</label>
+  <input className='textbox' id='start-input' type='date' value={Dval} onChange={(e) => { setDval(e.target.value) }} />
+
+  <label className="input-label" htmlFor="end-input" style={{ marginTop: "5px" }}>End Date</label>
+  <input className='textbox' id='end-input' type='date' value={Eval} onChange={(e) => { setEval(e.target.value) }} />
+</div>
+
+
+
+    
+                 <label className="input-label" htmlFor="method-input">Harvest Method</label>
+                <input className='textbox' id='method-input' type='text' value={Mval}
                         onChange={(e)=>{setMval(e.target.value)}} />
-                <input className='textbox' placeholder='Total Weight of Harvest' type='text' value={Tval}
+
+                <label className="input-label" htmlFor="weight-input">Total Weight of Harvest</label>
+                <input className='textbox' id='weight-input' type='text' value={Tval}
                         onChange={(e)=>{setTval(e.target.value)}} />
-                               
-                <input className='textbox' placeholder='Harvest Storage Temperature' type='text' value={Sval}
+
+                <label className="input-label" htmlFor="temperature-input">Harvest Storage Temperature</label>              
+                <input className='textbox' id='temperature-input' type='text' value={Sval}
                         onChange={(e)=>{setSval(e.target.value)}} />
-                <br/>
+                
                 <button className="btn" type="submit">Save</button>
                 </div>
               </form>

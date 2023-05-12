@@ -4,12 +4,9 @@
     backdrop-filter: blur(7.1px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     margin: auto;
-  width: 60%;
+    width: 67%;
 }
-.dataGrid {
-    height: 423px;
-    overflow: auto;
-}
+
 .cellWithImg{
     display: flex;
     align-items: center;
@@ -68,8 +65,4 @@
   .add-button:hover::after {
     right: -12px;
   }
-  
-DataGrid{
-        overflow: auto;
-       
-}
+
