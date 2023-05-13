@@ -122,13 +122,44 @@ router.post("/addLand", async (req, res) => {
 });
 
 router.get("/ProducedOil", async (req, res) => {
-  
-
-  const cursor = db1.collection("produceOil").find();
+  try {
+    
+    const cursor = db1.collection("produceOil").aggregate([
+      {
+        $lookup: {
+          from: "manufacturer",
+          localField: "manufacturer_id",
+          foreignField: "manufacturer_id",
+          as: "manufacturer",
+        },
+      }, 
+            
+      {
+        $project: {
+          _id: 0,
+          id: 1,
+          prod_date: 1,
+          quantity: 1,
+          spt: 1,
+          prod_meth: 1,
+          manufacturer_name: '$manufacturer.fullName',
+          
+        },
+      },
+    ]);
+    
+    const results = await cursor.toArray();
+    
+    res.send(results);
+    }catch (error) {
+    console.log(error);
+ }
+  /*
+const cursor = db1.collection("produceOil").find();
 
   const results = await cursor.toArray();
   console.log(results);
-  res.send(results);
+  res.send(results);*/
 });
 
 router.post("/produceOil", async (req, res) => {

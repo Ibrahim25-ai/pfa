@@ -52,8 +52,7 @@ const DataTableI = () => {
               
               return {
                 id:obj.id,
-              
-  
+                manufacturer_name: obj.manufacturer_name,
                 Pdate: obj.prod_date,
                 quantity: obj.quantity,
                 method: obj.prod_meth,
@@ -62,7 +61,7 @@ const DataTableI = () => {
               };
             });
            
-            //console.log(convertedResults);
+            console.log(convertedResults);
             setData(convertedResults);
             console.log(convertedResults);
             
