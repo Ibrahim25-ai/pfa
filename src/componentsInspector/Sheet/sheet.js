@@ -17,9 +17,10 @@ const Sheet = () => {
   const [data, setData] = useState({});
   const handleClick = async () => {
     // Get the data from the table and store it in state
+    
     const data = getDataFromTable();
     setValidationData(data);
-  
+   
     const provider = window.ethereum;
     const web3 = new Web3(provider);
     await provider.enable();
@@ -27,7 +28,7 @@ const Sheet = () => {
     contract.setProvider(provider);
     const accounts = await web3.eth.getAccounts();
     const owner = accounts[0];
-
+    
     
     
     const instance = await contract.deployed();
@@ -35,12 +36,15 @@ const Sheet = () => {
     let results = await fetch(`http://localhost:5050/lands/getHarvest`).then(
       (resp) => resp.json()
     );
-    const ipfs = await IPFS.create();
+    
+    try {
+      const ipfs = await IPFS.create();
+      // Use IPFS
+    
     const convertedResults = results.map((obj) => {
       return {
         id:obj.olive_id,
-        plotL: obj.landPlot_location,
-        Sdate: obj.Harvest_SDate,
+        plotL: obj.landPlot_location,        Sdate: obj.Harvest_SDate,
         Edate: obj.Harvest_EDate,
         method: obj.Harvest_Method,
         weight: obj.Total_Weight,
@@ -54,8 +58,9 @@ const Sheet = () => {
   console.log(cid.toString());
   const stream = ipfs.cat(cid)
 const decoder = new TextDecoder()
-let da1ta = ''
 
+
+let da1ta = ''
 for await (const chunk of stream) {
   // chunks of data are returned as a Uint8Array, convert it back to a string
   da1ta += decoder.decode(chunk, { stream: true })
@@ -67,7 +72,9 @@ for await (const chunk of stream) {
     const result3 = await instance.getCertifications(oliveid);
  
    console.log(result3);
-  
+  } catch (err) {
+    console.error(err);
+  }
    
   };
 
