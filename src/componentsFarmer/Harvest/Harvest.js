@@ -87,12 +87,12 @@ function Harvest() {
               <div className="flex flex-col item-center gap-2 ">
                 
               <div className='name flex w-2/3 gap-5' style={{ width: "100%" }}>
-  <label className="input-label" htmlFor="start-input" style={{ marginTop: "5px" }}>Start Date</label>
-  <input className='textbox' id='start-input' type='date' value={Dval} onChange={(e) => { setDval(e.target.value) }} />
+                <label className="input-label" htmlFor="start-input" style={{ marginTop: "5px" }}>Start Date</label>
+                <input className='textbox' id='start-input' type='date' value={Dval} onChange={(e) => { setDval(e.target.value) }} />
 
-  <label className="input-label" htmlFor="end-input" style={{ marginTop: "5px" }}>End Date</label>
-  <input className='textbox' id='end-input' type='date' value={Eval} onChange={(e) => { setEval(e.target.value) }} />
-</div>
+                <label className="input-label" htmlFor="end-input" style={{ marginTop: "5px" }}>End Date</label>
+                <input className='textbox' id='end-input' type='date' value={Eval} onChange={(e) => { setEval(e.target.value) }} />
+              </div>
 
 
 
