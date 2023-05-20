@@ -16,8 +16,13 @@ const Sheet = () => {
   const [validationData, setValidationData] = useState({});
   const [data, setData] = useState({});
   const handleClick = async () => {
+   
     // Get the data from the table and store it in state
     
+ 
+
+  
+
     const data = getDataFromTable();
     setValidationData(data);
    
@@ -33,46 +38,52 @@ const Sheet = () => {
     
     const instance = await contract.deployed();
     /* get the data to be inserted in the ipfs to make the hash */
-    let results = await fetch(`http://localhost:5050/lands/getHarvest`).then(
-      (resp) => resp.json()
-    );
+    // let results = await fetch(`http://localhost:5050/lands/getHarvest`).then(
+    //   (resp) => resp.json()
+    // );
     
-    try {
-      const ipfs = await IPFS.create();
-      // Use IPFS
+  try {
     
-    const convertedResults = results.map((obj) => {
-      return {
-        id:obj.olive_id,
-        plotL: obj.landPlot_location,        Sdate: obj.Harvest_SDate,
-        Edate: obj.Harvest_EDate,
-        method: obj.Harvest_Method,
-        weight: obj.Total_Weight,
-        name: obj.farmer_name,
-        
+    instance.getPastEvents('OliveHarvested', {
+      filter: { _oliveID: oliveid },
+  fromBlock: 0,
+  toBlock: 'latest'
+}, function(error, events){ console.log(events);
+ })
+.then(async function(events){
+
+  const convertedResults = 
+      {
+        ...data,
+        id:events[0].args[1].oliveID,
+        oliveVariety: events[0].args[1].oliveVariety,        
+        Sdate: events[0].args[1].harvStarDate,
+        Edate: events[0].args[1].harvEndDate,
+        method: events[0].args[1].harvMeth,
+        plantingDate: events[0].args[1].plantingDate,
+        ownerID: events[0].args[1].ownerID,
+    
       };
-    }).filter((obj) => obj.id === oliveid).concat(data);
+  
+    
+
+    const ipfs = await IPFS.create();
     const json = JSON.stringify(convertedResults);
-  const { cid } = await ipfs.add(json);
-
-  console.log(cid.toString());
-  const stream = ipfs.cat(cid)
-const decoder = new TextDecoder()
-
-
-let da1ta = ''
-for await (const chunk of stream) {
-  // chunks of data are returned as a Uint8Array, convert it back to a string
-  da1ta += decoder.decode(chunk, { stream: true })
-}
-
-
-    /* inserted in the smart contract to get the hash*/
-    const result2 = await instance.createCertification(oliveid,convertedResults[0].name.toString(),"test",convertedResults[0].Sdate.toString(),convertedResults[0].Edate.toString(), cid.toString(), { from: owner });
-    const result3 = await instance.getCertifications(oliveid);
- 
-   console.log(result3);
-  } catch (err) {
+    const { cid } = await ipfs.add(json);
+    console.log(cid.toString());
+    const stream = ipfs.cat(cid)
+  const decoder = new TextDecoder()
+  let da1ta = ''
+  for await (const chunk of stream) {
+    // chunks of data are returned as a Uint8Array, convert it back to a string
+    da1ta += decoder.decode(chunk, { stream: true })
+  }
+  
+     /* inserted in the smart contract to get the hash*/
+     await instance.createCertification(oliveid,convertedResults.ownerID.toString(),"test",convertedResults.Sdate.toString(),convertedResults.Edate.toString(), cid.toString(), { from: owner });
+     window.location.replace("http://localhost:3000/inspector");
+    });
+    } catch (err) {
     console.error(err);
   }
    

@@ -34,7 +34,7 @@ function Harvest() {
     try {
       const instance = await contract.deployed();
         
-      await instance.oliveHarvestItem(oliveid, { from: owner });
+      await instance.oliveHarvestItem(oliveid,Dval,Eval,Mval,Sval,{ from: owner });
       
     const data = {
       id:owner,

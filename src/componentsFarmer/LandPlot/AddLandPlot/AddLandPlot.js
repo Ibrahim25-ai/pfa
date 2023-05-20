@@ -31,7 +31,7 @@ function AddLandPlot() {
     try {
       const instance = await contract.deployed();
       const result = await instance.addLand(Gval, Tval, Aval, Nval, owner, { from: owner });
-
+      console.log(result);
       const data = {
         land_id : result.logs[0].args[0],
         geo_loc: Gval,

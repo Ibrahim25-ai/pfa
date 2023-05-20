@@ -48,6 +48,10 @@ contract SupplyChain
         string numberTree; // number Tree
         string oliveVariety; // olive Variety
         string plantingDate; // planting Date
+        string harvStarDate;
+        string harvEndDate;
+        string harvMeth;
+        string storTemp;
         OliveState itemState; // Product State as represented in the enum above
     }
 struct CertificationItem {
@@ -63,8 +67,8 @@ struct CertificationItem {
 
     // Define events of olives
     event LandCreated(address _idLand);
-    event OlivePlanted(address _oliveID);
-    event OliveHarvested(address _oliveID);
+    event OlivePlanted(address _oliveID,OliveItem _oliveitems1);
+    event OliveHarvested(address indexed _oliveID,OliveItem _oliveitems);
     event OliveProduced(address _oliveID);
 
    
@@ -93,7 +97,7 @@ struct CertificationItem {
  
 
     function addLand( 
-        string memory _geoLoc,
+        string  memory _geoLoc,
         string memory _sailTyp,
         uint256 _alt,
         uint256 _nbTree,
@@ -137,26 +141,37 @@ struct CertificationItem {
             numberTree : numberTree,
             oliveVariety :oliveVariety,
             plantingDate : plantingDate,
+            harvStarDate : "",
+            harvEndDate : "",
+            harvMeth : "",
+            storTemp : "",
             itemState : OliveState.Planted
             });
 
         oliveItems[_oliveID] = newOliveItem;
         
-        emit OlivePlanted(_oliveID);
+        emit OlivePlanted(_oliveID,newOliveItem);
     }
 
     // Define a function 'oliveHarvestItem' that allows a farmer to mark an item 'Harvested'
     function oliveHarvestItem(
-        address _oliveID
-
+        address  _oliveID,
+        string memory sDate,
+        string memory eDate,
+        string memory metHar,
+        string memory stoTem
     ) public  isPlanted(_oliveID) {
         // Add the new item as part of Harvest
         oliveItems[_oliveID].ownerID = msg.sender;
-        
+        oliveItems[_oliveID].harvStarDate = sDate;
+        oliveItems[_oliveID].harvEndDate = eDate;
+        oliveItems[_oliveID].harvMeth = metHar;
+        oliveItems[_oliveID].storTemp = stoTem;
+
         // Update state
         oliveItems[_oliveID].itemState = OliveState.Harvested;
         // Emit the appropriate event
-        emit OliveHarvested(_oliveID);
+        emit OliveHarvested(_oliveID, oliveItems[_oliveID]);
     }
     function oliveProducetItem(
         address _oliveID
@@ -164,11 +179,14 @@ struct CertificationItem {
     ) public  isHarvested(_oliveID) {
          // Add the new item as part of Harvest
         oliveItems[_oliveID].ownerID = msg.sender;
-        
+       
         // Update state
         oliveItems[_oliveID].itemState = OliveState.produced;
         // Emit the appropriate event
         emit OliveProduced(_oliveID);
+    }
+    function getHarvestedItem(address _oliveID) public view returns (OliveItem memory) {
+        return oliveItems[_oliveID];
     }
     function createCertification(
         address _oliveID,

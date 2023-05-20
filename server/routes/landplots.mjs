@@ -174,6 +174,28 @@ router.post("/produceOil", async (req, res) => {
     res.status(500).send({ message: "Error inserting data" });
   }
 });
+router.get("/certOlive/:hash", async (req, res) => {
+  const hash = req.params.hash;
+  try {
+    
+   
+  } catch (err) {
+    console.error(`Error deleting document: ${err}`);
+    res.status(500).send({ message: "Error deleting data" });
+  }
+});
+router.post("/certOlive/:hash", async (req, res) => {
+  const hash = req.params.hash; // extract the hash from the URL parameter
+
+  try {
+    // do something with the request body here, if needed
+    
+    res.status(201).send({ message: "Data inserted successfully", hash: hash });
+  } catch (err) {
+    console.error(`Error inserting document: ${err}`);
+    res.status(500).send({ message: "Error inserting data" });
+  }
+});
   /*router.delete("/deleteLand/:id", async (req, res) => {
     const id = req.params.id;
     try {
