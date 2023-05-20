@@ -18,7 +18,9 @@ import AddOil from './componentsManufacturer/AddOil/AddOil'
 import Inspector from './componentsInspector/InspectorTable/Inspector';
 import DataTableI from './componentsInspector/InspectorTable/DataTableI/DataTableI';
 import Sheet from './componentsInspector/Sheet/sheet'
-import DataTableS from './componentsInspector/Sheet/DataTableS/DataTableS'
+import DataTableS from './componentsInspector/Sheet/DataTableS/DataTableS';
+import User from './componentsUser/User';
+import DataTableU from './componentsUser/DataTableU'
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
           <Route path="/DataTableI" element={<DataTableI/>} />
           <Route path="/Sheet" element={<Sheet/>} />
           <Route path="/DataTableS" element={<DataTableS/>} />
+          <Route path="/User" element={<User/>} />
+          <Route path="/DataTableU" element={<DataTableU/>} />
         </Routes>
       </BrowserRouter>
       
