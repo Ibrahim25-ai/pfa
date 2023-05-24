@@ -11,6 +11,9 @@ const DataTableM = () => {
   const handleClick1 = (params) => {
     navigate("../../AddOil", { state: { oliveid: params.row.id } });
   };
+  const handleClick2 = (params) => {
+    navigate("../../packageOil");
+  };
 
 
 
@@ -18,19 +21,23 @@ const DataTableM = () => {
     {
       field: "action",
       headerName: "ACTION",
-      width: 235,
+      width: 285,
       renderCell: (params,test) => {
         return (
           <div className="cellAction">
             <div>
               { !params.row.produced  && (
-                <div
-                  className="viewButton1"
-                  onClick={() => handleClick1(params)}
-                >
-                  Produce Oil
-                </div>
+                <div className="viewButton1" onClick={() => handleClick1(params)}>Produce Oil</div>
+                
               )}
+            
+            </div>
+            
+            <div>
+              { 
+                
+                <div className="viewButton2" onClick={() => handleClick2(params)}>Package Oil</div>
+              }
             </div>
 
             <div
