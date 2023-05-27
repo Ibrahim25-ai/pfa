@@ -58,7 +58,10 @@ const DataTableS = ({ onValidate }) => {
           type="text"
           value={params.value}
           onChange={(event) => handleTableCellChange(params, event)}
-          style={{ width: '90%' }}
+          style={{ width: '90%',border: '1px solid #ccc',
+          borderRadius: '10px',
+          padding: '8px',
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',}}
         />
       ),
     },
